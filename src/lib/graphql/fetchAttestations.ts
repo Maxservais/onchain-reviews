@@ -1,7 +1,7 @@
 import { GraphQLClient } from "graphql-request";
 
-import { attestationDocument } from "@/lib/graphql/graphqlQuery";
 import { baseEndpoint, easCoinbaseSchema } from "@/config/eas";
+import { attestationDocument } from "@/lib/graphql/graphqlQuery";
 
 const graphQLClient = new GraphQLClient(baseEndpoint, {});
 

@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Fragment, useState } from "react";
+import { Fragment } from "react";
 
 import { trpc } from "@/app/_trpc/client";
 
@@ -26,9 +26,9 @@ export function AddReview({ slug }: { slug: string }) {
   );
 }
 
-export default function Reviews({ app }: { app: any }) {
+export default function Reviews({ appSlug }: { appSlug: string }) {
   const reviewStats = trpc.reviewsRouter.getReviewStats.useQuery({
-    appSlug: app.slug,
+    appSlug: appSlug,
   });
 
   return (
@@ -49,9 +49,9 @@ export default function Reviews({ app }: { app: any }) {
                 <DetailedScores reviewStats={reviewStats.data} />
               </Fragment>
             ) : null}
-            <AddReview slug={app.slug} />
+            <AddReview slug={appSlug} />
           </div>
-          <AllReviews slug={app.slug} />
+          <AllReviews slug={appSlug} />
         </div>
       </div>
     </section>

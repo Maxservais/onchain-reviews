@@ -2,8 +2,8 @@ import { createTRPCClient, httpBatchLink } from "@trpc/client";
 import { createTRPCReact } from "@trpc/react-query";
 import superjson from "superjson";
 
-import { AppRouter } from "@/server/index";
 import { getBaseUrl } from "@/lib/utils";
+import { AppRouter } from "@/server/index";
 
 export const trpc = createTRPCReact<AppRouter>({});
 

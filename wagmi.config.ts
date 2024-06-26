@@ -1,6 +1,6 @@
 import { createPublicClient, createWalletClient } from "viem";
 import { createConfig, http } from "wagmi";
-import { Chain, base, optimism, optimismSepolia } from "wagmi/chains";
+import { base, Chain, optimism, optimismSepolia } from "wagmi/chains";
 import { coinbaseWallet, injected, walletConnect } from "wagmi/connectors";
 
 declare module "wagmi" {

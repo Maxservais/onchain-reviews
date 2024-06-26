@@ -17,9 +17,9 @@ import {
 } from "@/lib/graphql/fetchGitcoin";
 import { fetchPoap } from "@/lib/graphql/fetchPoap";
 
+import { getPublicClient } from "../../../wagmi.config";
 import { procedure, router } from "../trpc";
 import { linearNormalize, truncateAddress } from "../utils/utils";
-import { getPublicClient } from "../../../wagmi.config";
 
 export const db = drizzle(sql, { schema });
 

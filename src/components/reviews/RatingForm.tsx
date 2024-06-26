@@ -9,8 +9,8 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { faqs, Status } from "@/app/new-review/[slug]/AddReview";
 import connectWallet, { getNetworks } from "@/lib/wallet/connectWallet";
 
-import { Faq } from "../utils/FAQ";
 import { config } from "../../../wagmi.config";
+import { Faq } from "../utils/FAQ";
 
 export type IFormInput = {
   review: string;

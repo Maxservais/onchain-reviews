@@ -6,8 +6,8 @@ import { StarIcon as Star } from "@heroicons/react/24/outline";
 import Avatar from "boring-avatars";
 import { format } from "date-fns";
 import delve from "dlv";
-import Link from "next/link";
 import Image from "next/image";
+import Link from "next/link";
 import { Fragment } from "react";
 import { useState } from "react";
 

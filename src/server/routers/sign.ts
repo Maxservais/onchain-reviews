@@ -1,12 +1,12 @@
 import { SimulateContractErrorType, WriteContractErrorType } from "viem";
 import { privateKeyToAccount } from "viem/accounts";
-import { getPublicClient, getWalletClient } from "../../../wagmi.config";
 import { z } from "zod";
 
 import { easABI } from "@/abis/eas";
 import { easContractAddress } from "@/config/eas";
 import { backgroundTask } from "@/lib/process/processReviews";
 
+import { getPublicClient, getWalletClient } from "../../../wagmi.config";
 import { procedure, router } from "../trpc";
 
 // Define regex patterns

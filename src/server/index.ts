@@ -5,6 +5,7 @@ import { drizzle } from "drizzle-orm/vercel-postgres";
 
 import * as schema from "@/db/schema";
 
+import { appsRouter } from "./routers/apps";
 import { importRouter } from "./routers/import";
 import { reviewersRouter } from "./routers/reviewers";
 import { reviewsRouter } from "./routers/reviews";
@@ -18,6 +19,7 @@ export const appRouter = router({
   reviewersRouter,
   importRouter,
   signRouter,
+  appsRouter,
 });
 
 export type AppRouter = typeof appRouter;

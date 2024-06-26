@@ -6,9 +6,9 @@ import { drizzle } from "drizzle-orm/vercel-postgres";
 import { z } from "zod";
 
 import * as schema from "@/db/schema";
+import { calculateReviewStats } from "@/lib/parseReviews";
 
 import { procedure, router } from "../trpc";
-import { calculateReviewStats } from "@/lib/parseReviews";
 
 export const db = drizzle(sql, { schema });
 

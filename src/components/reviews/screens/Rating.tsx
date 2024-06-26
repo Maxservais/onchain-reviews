@@ -19,7 +19,6 @@ import {
   writeContract,
 } from "viem/actions";
 import { useAccount } from "wagmi";
-
 import { base, mainnet, optimism, optimismSepolia } from "wagmi/chains";
 
 import { easABI } from "@/abis/eas";
@@ -31,9 +30,9 @@ import { useEthersSigner } from "@/hooks/useEthersSigner";
 import { scrollToTop } from "@/lib/utils";
 import connectWallet from "@/lib/wallet/connectWallet";
 
+import { config } from "../../../../wagmi.config";
 import { backgroundTask } from "../../../lib/process/processReviews";
 import RatingForm, { IFormInput } from "../RatingForm";
-import { config } from "../../../../wagmi.config";
 
 const eas = new EAS(easContractAddress);
 

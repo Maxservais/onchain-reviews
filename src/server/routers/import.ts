@@ -3,7 +3,7 @@ import "@/db/envConfig";
 import slugify from "@sindresorhus/slugify";
 import { sql } from "@vercel/postgres";
 import { fromUnixTime, getUnixTime } from "date-fns";
-import { eq } from "drizzle-orm";
+import { desc, eq } from "drizzle-orm";
 import { drizzle } from "drizzle-orm/vercel-postgres";
 import { readFileSync } from "fs";
 
@@ -40,6 +40,7 @@ export const importRouter = router({
           .values(
             reviews.map((review) => ({
               slug: slugify(review.appName),
+              name: review.appName,
               createdAt: now,
             }))
           )
@@ -71,6 +72,46 @@ export const importRouter = router({
 
       return true;
     });
+  }),
+  importApps: procedure.mutation(async () => {
+    try {
+      const data = JSON.parse(
+        readFileSync("/Users/maxime/Downloads/apps.json", "utf8")
+      );
+
+      for (const app of data) {
+        await db.transaction(async (trx) => {
+          await trx
+            .insert(schema.AppsTable)
+            .values({
+              slug: slugify(app.name),
+              name: app.name,
+              description: app.description,
+              website: app.website,
+              twitter: app.twitter,
+              logoUrl: app.logoUrl,
+              lastModificationDate: new Date(),
+              creationDate: new Date(),
+            })
+            .onConflictDoUpdate({
+              target: schema.AppsTable.slug,
+              set: {
+                description: app.description,
+                website: app.website,
+                twitter: app.twitter,
+                logoUrl: app.logoUrl,
+                lastModificationDate: new Date(),
+              },
+            });
+        });
+      }
+
+      console.log("Data imported successfully");
+      return true;
+    } catch (error) {
+      console.error("Error importing data:", error);
+      return false;
+    }
   }),
   importDebank: procedure.mutation(async (opts) => {
     try {

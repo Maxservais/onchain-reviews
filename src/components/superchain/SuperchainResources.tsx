@@ -1,5 +1,5 @@
-import Link from "next/link";
 import Image from "next/image";
+import Link from "next/link";
 import { RxExternalLink } from "react-icons/rx";
 
 const resources = [

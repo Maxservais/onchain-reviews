@@ -1,0 +1,120 @@
+"use client";
+
+import delve from "dlv";
+import Link from "next/link";
+import { FaXTwitter } from "react-icons/fa6";
+import { RxExternalLink, RxGlobe } from "react-icons/rx";
+
+import { trpc } from "@/app/_trpc/client";
+
+type AppProps = {
+  app: {
+    slug: string;
+    name: string;
+    description: string | null;
+    website: string | null;
+    twitter: string | null;
+    logoUrl: string | null;
+  };
+};
+
+export function AppGrid({ app }: AppProps) {
+  return (
+    <div className="group relative flex flex-col h-full rounded-2xl border border-slate-200 bg-white dark:bg-slate-900 dark:border-white/20 transition-shadow hover:shadow-md hover:shadow-zinc-900/5 dark:bg-white/2.5 dark:hover:shadow-black/5">
+      <div className="absolute inset-0 rounded-2xl border-2 border-transparent opacity-0 [background:linear-gradient(var(--quick-links-hover-bg,theme(colors.sky.50)),var(--quick-links-hover-bg,theme(colors.sky.50)))_padding-box,linear-gradient(to_top,theme(colors.indigo.400),theme(colors.cyan.400),theme(colors.sky.500))_border-box] group-hover:opacity-100 dark:[--quick-links-hover-bg:theme(colors.slate.800)]" />
+      <Link
+        key={delve(app, "slug")}
+        href={`/apps/${delve(app, "slug")}`}
+        className="flex-grow flex flex-col justify-between"
+      >
+        <div className="relative px-6 pt-6">
+          <div className="flex items-center">
+            <img
+              className="flex-shrink-0 w-16 h-auto rounded-2xl"
+              src={delve(app, "logoUrl")}
+              alt={"App image"}
+              height={128}
+              width={128}
+            />
+            <div className="ml-5 mr-auto">
+              <h3 className="text-xl ml-1 mb-2 font-semibold text-gray-900 dark:text-white">
+                {delve(app, "name")}
+              </h3>
+            </div>
+            <RxExternalLink
+              className="absolute top-6 right-6 h-4 w-4 text-sky-400 hover:text-sky-600"
+              title="View Page"
+            />
+          </div>
+          <div className="text-base line-clamp-3 pt-4 leading-relaxed text-gray-600 dark:text-gray-300">
+            <p>{delve(app, "description")}</p>
+          </div>
+        </div>
+      </Link>
+      <div className="flex justify-between items-center px-6 py-4 z-10">
+        <div className="flex w-full items-center space-x-0.5 sm:space-x-1.5 justify-stretch">
+          <Link
+            href={delve(app, "twitter")}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
+          >
+            <FaXTwitter className="h-5 w-5 text-gray-400 hover:text-sky-300" />
+          </Link>
+          <Link
+            href={delve(app, "website")}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
+          >
+            <RxGlobe className="h-5 w-5 text-gray-400 hover:text-sky-300" />
+          </Link>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+export default function Apps({
+  max,
+  displayLink = false,
+}: {
+  max?: number;
+  displayLink?: boolean;
+}) {
+  const { data: apps } = trpc.appsRouter.getApps.useQuery();
+
+  const displayedApps = max ? apps?.slice(0, max) : apps;
+
+  return (
+    <div
+      id="apps"
+      className="max-w-8xl mx-auto px-4 sm:px-6 lg:px-8 py-4 md:py-6 lg:py-8"
+    >
+      <div className="flex flex-col sm:flex-row items-start sm:items-end justify-between pb-4 mt-24 sm:mt-42">
+        <div>
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 dark:text-white pb-2">
+            Some popular Apps
+          </h2>
+          <p className="text-base text-gray-700 dark:text-gray-300 pb-2 sm:pb-0">
+            A collection of some popular apps part of the Superchain ecosystem.
+          </p>
+        </div>
+        {displayLink && (
+          <Link
+            href="/apps"
+            className="whitespace-nowrap text-sm font-medium text-sky-600 hover:text-sky-500 dark:text-sky-500 dark:hover:text-sky-400"
+          >
+            View all Apps
+            <span aria-hidden="true"> &rarr;</span>
+          </Link>
+        )}
+      </div>
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 xl:gap-6 ">
+        {displayedApps?.map((app) => (
+          <AppGrid key={app.slug} app={app} />
+        ))}
+      </div>
+    </div>
+  );
+}

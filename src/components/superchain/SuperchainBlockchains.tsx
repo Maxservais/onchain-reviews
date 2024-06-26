@@ -33,7 +33,10 @@ const BlockchainCard = ({ blockchain }: BlockchainCardProps) => {
 
 export default function SuperchainBlockchains() {
   return (
-    <div className="max-w-8xl mx-auto px-4 sm:px-6 lg:px-8 py-4 md:py-6 lg:py-8">
+    <div
+      id="blockchains"
+      className="max-w-8xl mx-auto px-4 sm:px-6 lg:px-8 py-4 md:py-6 lg:py-8"
+    >
       <div className="flex flex-col sm:flex-row items-start sm:items-end justify-between pb-4 mt-24 sm:mt-42">
         <div>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 dark:text-white pb-2">
@@ -44,13 +47,13 @@ export default function SuperchainBlockchains() {
             MIT-licensed open source OP Stack
           </p>
         </div>
-        <Link
+        {/* <Link
           href="/blockchains"
           className="whitespace-nowrap text-sm font-medium text-sky-600 hover:text-sky-500 dark:text-sky-500 dark:hover:text-sky-400"
         >
           View all Blockchains
           <span aria-hidden="true"> &rarr;</span>
-        </Link>
+        </Link> */}
       </div>
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-x-4 gap-y-4">
         {blockchainsData.map((blockchain: BlockchainProps) => (

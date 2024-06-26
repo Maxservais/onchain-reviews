@@ -1,4 +1,3 @@
-// import { sql } from "drizzle-orm";
 import {
   boolean,
   integer,
@@ -66,6 +65,11 @@ export const ReviewersTable = pgTable("reviewers", {
 
 export const AppsTable = pgTable("apps", {
   slug: varchar("slug", { length: 256 }).primaryKey(),
+  name: varchar("name", { length: 256 }).notNull(),
+  description: text("description"),
+  website: varchar("website", { length: 256 }),
+  twitter: varchar("twitter", { length: 256 }),
+  logoUrl: varchar("logoUrl", { length: 256 }),
   lastModificationDate: timestamp("lastModificationDate"),
   creationDate: timestamp("creationDate").defaultNow().notNull(),
 });

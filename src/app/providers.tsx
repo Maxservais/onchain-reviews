@@ -1,17 +1,18 @@
 "use client";
 
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { createWeb3Modal } from "@web3modal/wagmi/react";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { httpBatchLink } from "@trpc/client";
+import { createWeb3Modal } from "@web3modal/wagmi/react";
 import { useState } from "react";
 import superjson from "superjson";
 import { WagmiProvider } from "wagmi";
 import { optimism } from "wagmi/chains";
 
+import { getBaseUrl } from "@/lib/utils";
+
 import { config, projectId } from "../../wagmi.config";
 import { trpc } from "./_trpc/client";
-import { getBaseUrl } from "@/lib/utils";
 
 if (!projectId) throw new Error("Project ID is not defined");
 

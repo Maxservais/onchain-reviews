@@ -1,6 +1,7 @@
 import { getAccount, switchChain } from "@wagmi/core";
 import { type SwitchChainReturnType } from "@wagmi/core";
 import { base, optimism, optimismSepolia } from "wagmi/chains";
+
 import { config } from "../../../wagmi.config";
 
 export const getNetworks = () => {
