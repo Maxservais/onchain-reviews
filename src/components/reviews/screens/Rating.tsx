@@ -23,7 +23,7 @@ import { base, mainnet, optimism, optimismSepolia } from "wagmi/chains";
 
 import { easABI } from "@/abis/eas";
 import { client } from "@/app/_trpc/client";
-import { Status } from "@/app/new-review/[slug]/AddReview";
+import { App, Status } from "@/app/new-review/[slug]/NewReview";
 import { NO_EXPIRATION, ZERO_ADDRESS, ZERO_BYTES32 } from "@/config/constants";
 import { easContractAddress, easReviewSchema } from "@/config/eas";
 import { useEthersSigner } from "@/hooks/useEthersSigner";
@@ -43,7 +43,7 @@ export default function Rating({
   setReviewStatus,
   setError,
 }: {
-  app: any;
+  app: App;
   reviewStatus: Status;
   setNewAttestationUID: (uid: string) => void;
   setReviewStatus: Dispatch<SetStateAction<Status>>;
@@ -208,7 +208,7 @@ export default function Rating({
   return (
     <>
       <div className="pt-6 text-left">
-        <h3 className="text-2xl font-semibold leading-9 text-gray-900 dark:text-white">
+        <h3 className="text-2xl font-semibold leading-9 text-gray-900">
           Review {app?.name}
         </h3>
       </div>

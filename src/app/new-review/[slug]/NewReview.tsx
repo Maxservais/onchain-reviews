@@ -1,7 +1,9 @@
 "use client";
 
+import { notFound } from "next/navigation";
 import { useState } from "react";
 
+import { trpc } from "@/app/_trpc/client";
 import { Error } from "@/components/reviews/screens/Error";
 import Rating from "@/components/reviews/screens/Rating";
 import { Success } from "@/components/reviews/screens/Success";
@@ -15,29 +17,31 @@ export type Status =
   | "success"
   | "error";
 
-export default function ReviewPage({ slug }: { slug: string }) {
-  const data = {
-    attributes: {
-      slug: "uniswap",
-      name: "Uniswap",
-      description:
-        "Uniswap is a decentralized finance protocol that is used to exchange cryptocurrencies. It is based on the Ethereum blockchain and allows users to trade without intermediaries.",
-      website: "https://uniswap.org/",
-      logo: "https://uniswap.org/logo.png",
-    },
-  };
+export type App = {
+  name: string;
+  description: string | null;
+  slug: string;
+  website: string | null;
+  twitter: string | null;
+  logoUrl: string | null;
+  lastModificationDate: Date | null;
+  creationDate: Date;
+};
 
-  return <ReviewForm app={data} />;
-}
-
-export function ReviewForm({ app }: { app: any }) {
+export default function NewReview({ slug }: { slug: string }) {
   const [reviewStatus, setReviewStatus] = useState<Status>("rating");
   const [error, setError] = useState<string>("");
   const [newAttestationUID, setNewAttestationUID] = useState("");
 
+  const { data: app } = trpc.appsRouter.getApp.useQuery({ appSlug: slug });
+
+  if (!app?.slug) {
+    return notFound();
+  }
+
   return (
     <section className="py-6 sm:px-2 xl:px-4">
-      <div className="mx-auto max-w-4xl rounded-2xl border border-slate-200 bg-white dark:bg-slate-900 dark:border-white/20 py-4 md:py-6 lg:py-8 px-4 sm:px-6 lg:px-8">
+      <div className="mx-auto max-w-4xl rounded-2xl border border-slate-200 bg-white py-4 md:py-6 lg:py-8 px-4 sm:px-6 lg:px-8">
         <div className="min-h-[50vh] flex flex-col justify-center">
           <ConnectWallet />
           {(reviewStatus === "rating" ||
@@ -65,16 +69,10 @@ export function ReviewForm({ app }: { app: any }) {
 
 export const faqs: FAQEntry[] = [
   {
-    index: 0,
-    question: "Why contribute a review to Ethereum Ecosystem?",
-    answer:
-      "Visitors come to Ethereum Ecosystem to explore a wide range of apps and tools. By sharing your experiences, you help others make informed decisions.",
-  },
-  {
     index: 1,
     question: "Why do I need a wallet?",
     answer:
-      "A wallet is needed to add a review to the Ethereum Ecosystem because it uses cryptography to verify your identity, ensuring authenticity and security. Additionally, it allows you to interact with the blockchain directly and securely.",
+      "A wallet is needed to add a review because it uses cryptography to verify your identity, ensuring authenticity and security. Additionally, it allows you to interact with the blockchain directly and securely.",
   },
   {
     index: 2,

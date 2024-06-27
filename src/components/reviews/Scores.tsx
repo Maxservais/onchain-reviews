@@ -20,13 +20,13 @@ export function FinalScore({ reviewStats }: { reviewStats: reviewStats }) {
               aria-hidden="true"
             />
           ))}
-          <p className="ml-2 text-sm text-gray-900 dark:text-white">
+          <p className="ml-2 text-sm text-gray-900">
             {reviewStats.average}
           </p>
         </div>
         <p className="sr-only">{reviewStats.average} out of 5 stars</p>
       </div>
-      <p className="ml-2 text-sm text-gray-900 dark:text-white">
+      <p className="ml-2 text-sm text-gray-900">
         ({reviewStats.totalCount} reviews)
       </p>
     </div>
@@ -46,7 +46,7 @@ export default function DetailedScores({
         {reviewStats?.counts.map((count) => (
           <div key={count.rating} className="flex items-center text-sm">
             <dt className="flex flex-1 items-center">
-              <p className="w-3 font-medium text-gray-900 dark:text-white">
+              <p className="w-3 font-medium text-gray-900">
                 {count.rating}
                 <span className="sr-only"> star reviews</span>
               </p>
@@ -60,7 +60,7 @@ export default function DetailedScores({
                 />
 
                 <div className="relative ml-3 flex-1">
-                  <div className="h-3 rounded-full border border-gray-200 bg-gray-100 dark:border-white/10" />
+                  <div className="h-3 rounded-full border border-gray-200 bg-gray-100" />
                   {count.count > 0 ? (
                     <div
                       className="absolute inset-y-0 rounded-full border border-yellow-400 bg-yellow-400"
@@ -72,7 +72,7 @@ export default function DetailedScores({
                 </div>
               </div>
             </dt>
-            <dd className="ml-3 w-10 text-right text-sm tabular-nums text-gray-900 dark:text-white">
+            <dd className="ml-3 w-10 text-right text-sm tabular-nums text-gray-900">
               {Math.round((count.count / reviewStats.totalCount) * 100)}%
             </dd>
           </div>

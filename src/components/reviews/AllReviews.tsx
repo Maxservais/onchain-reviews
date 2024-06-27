@@ -56,14 +56,14 @@ export function Review({
           <div className="flex flex-row">
             <div className="relative group">
               <Link
-                className="text-sm font-bold text-gray-900 dark:text-white"
+                className="text-sm font-bold text-gray-900"
                 href={`${optimismExplorer}/address/${address}`}
                 target="_blank"
               >
                 {formattedAddress ? formattedAddress : address}
               </Link>
               {(farcaster || poap || debank) && (
-                <div className="absolute left-5 bottom-full mb-2 p-2 bg-sky-50 rounded-md shadow opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-10">
+                <div className="absolute left-5 bottom-full mb-2 p-2 bg-red-50 rounded-md shadow opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-10">
                   <div className="flex w-24 items-center justify-center space-x-2">
                     {farcaster && (
                       <Link
@@ -116,15 +116,15 @@ export function Review({
             </div>
             {trustScore !== undefined && trustScore > 0.1 && (
               <div className="group relative w-max">
-                <CheckBadgeIcon className="ml-1 h-4 w-4 flex-shring-0 text-sky-500" />
-                <span className="absolute left-5 bottom-full mb-2 p-2 z-10 pointer-events-none hidden sm:group-hover:block w-max bg-sky-50 rounded-md shadow text-sm text-gray-600">
+                <CheckBadgeIcon className="ml-1 h-4 w-4 flex-shring-0 text-red-500" />
+                <span className="absolute left-5 bottom-full mb-2 p-2 z-10 pointer-events-none hidden sm:group-hover:block w-max bg-red-50 rounded-md shadow text-sm text-gray-600">
                   This reviewer has a high trust score based on his onchain
                   footprint.
                 </span>
               </div>
             )}
           </div>
-          <p className="text-sm text-gray-500 dark:text-gray-300">
+          <p className="text-sm text-gray-500">
             <time>{format(date, "MMMM dd, yyyy")}</time>
           </p>
         </div>
@@ -145,7 +145,7 @@ export function Review({
         <p className="sr-only">{score} out of 5 stars</p>
       </div>
       <div
-        className="mt-2 text-base font-light  italic text-gray-600 dark:text-gray-300"
+        className="mt-2 text-base font-light  italic text-gray-600"
         dangerouslySetInnerHTML={{ __html: review }}
       />
     </div>
@@ -167,7 +167,7 @@ const LoadMore = ({
         <button
           onClick={() => fetchNextPage()}
           disabled={!hasNextPage || isFetchingNextPage}
-          className="inline-flex p-3 font-medium text-sky-600 dark:text-sky-500 transition-all duration-200 hover:text-sky-500 dark:hover:text-sky-400 focus:text-sky-900 hover:underline"
+          className="inline-flex p-3 font-medium text-red-600 transition-all duration-200 hover:text-red-500 focus:text-red-900 hover:underline"
         >
           {isFetchingNextPage
             ? "Loading more..."
@@ -184,15 +184,10 @@ function ReviewSkeleton() {
   return (
     <div className="py-8">
       <div className="flex items-center">
-        <Avatar
-          size={48}
-          name={Math.random().toString()}
-          variant="marble"
-          colors={["#92A1C6", "#146A7C", "#F0AB3D", "#C271B4", "#C20D90"]}
-        />
+        <Avatar size={48} variant="marble" />
         <div className="ml-4 space-y-2">
-          <div className="h-4 bg-gray-200 dark:bg-gray-500 rounded w-24" />
-          <div className="h-4 bg-gray-200 dark:bg-gray-500 rounded w-16" />
+          <div className="h-4 bg-gray-200 rounded w-24" />
+          <div className="h-4 bg-gray-200 rounded w-16" />
         </div>
       </div>
       <div className="mt-4">
@@ -207,8 +202,8 @@ function ReviewSkeleton() {
         </div>
       </div>
       <div className="mt-2 space-y-2 text-base">
-        <div className="h-4 bg-gray-200 dark:bg-gray-500 rounded" />
-        <div className="h-4 bg-gray-200 dark:bg-gray-500 rounded w-1/2" />
+        <div className="h-4 bg-gray-200 rounded" />
+        <div className="h-4 bg-gray-200 rounded w-1/2" />
       </div>
     </div>
   );
@@ -299,10 +294,10 @@ export default function AllReviews({ slug }: { slug: string }) {
       <div className="mt-16 lg:col-span-7 lg:col-start-6 lg:mt-0">
         <div className="flex justify-end items-center w-full sm:w-auto pt-4 sm:pt-0">
           <div className="relative inline-block text-left px-4">
-            <div className="h-4 bg-gray-200 dark:bg-gray-500 rounded w-16" />
+            <div className="h-4 bg-gray-200 rounded w-16" />
           </div>
           <div className="relative inline-block text-left px-4">
-            <div className="h-4 bg-gray-200 dark:bg-gray-500 rounded w-20" />
+            <div className="h-4 bg-gray-200 rounded w-20" />
           </div>
         </div>
         <div className="flow-root">
@@ -330,17 +325,17 @@ export default function AllReviews({ slug }: { slug: string }) {
       <div className="mt-16 lg:col-span-7 lg:col-start-6 lg:mt-0">
         <div className="text-center">
           <Star className="mx-auto h-12 w-12 text-yellow-400" />
-          <h3 className="mt-2 text-sm font-semibold text-gray-900 dark:text-white">
+          <h3 className="mt-2 text-sm font-semibold text-gray-900">
             There are no reviews yet!
           </h3>
-          <p className="mt-1 text-sm text-gray-600 dark:text-gray-300">
+          <p className="mt-1 text-sm text-gray-600">
             Be the first and add a review.
           </p>
           <div className="mt-6">
             <Link
               href={`/new-review/${slug}`}
               type="button"
-              className="inline-flex items-center rounded-md bg-sky-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-sky-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-600"
+              className="inline-flex items-center rounded-md bg-red-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-red-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-600"
             >
               <PlusIcon className="-ml-0.5 mr-1.5 h-5 w-5" aria-hidden="true" />
               Add new Review
@@ -356,10 +351,10 @@ export default function AllReviews({ slug }: { slug: string }) {
       <div className="flex justify-end items-center w-full sm:w-auto pt-4 sm:pt-0">
         <Menu as="div" className="relative inline-block text-left px-4">
           <div>
-            <Menu.Button className="group inline-flex justify-center text-sm font-medium text-gray-700 hover:text-gray-900 dark:text-white">
+            <Menu.Button className="group inline-flex justify-center text-sm font-medium text-gray-700 hover:text-gray-900">
               Sort
               <ChevronDownIcon
-                className="-mr-1 ml-1 h-5 w-5 flex-shrink-0 text-gray-400 group-hover:text-gray-500 dark:text-white dark:group-hover:text-gray-200"
+                className="-mr-1 ml-1 h-5 w-5 flex-shrink-0 text-gray-400 group-hover:text-gray-500"
                 aria-hidden="true"
               />
             </Menu.Button>
@@ -374,7 +369,7 @@ export default function AllReviews({ slug }: { slug: string }) {
             leaveFrom="transform opacity-100 scale-100"
             leaveTo="transform opacity-0 scale-95"
           >
-            <Menu.Items className="absolute right-0 z-10 mt-2 w-40 origin-top-right rounded-md bg-white dark:bg-slate-900 shadow-2xl ring-1 ring-black ring-opacity-5 focus:outline-none">
+            <Menu.Items className="absolute right-0 z-10 mt-2 w-40 origin-top-right rounded-md bg-white shadow-2xl ring-1 ring-black ring-opacity-5 focus:outline-none">
               <div className="py-1">
                 {sortOptions.map((option, index) => (
                   <Menu.Item key={option.value}>
@@ -383,11 +378,9 @@ export default function AllReviews({ slug }: { slug: string }) {
                         key={`sortOption-${index}`}
                         className={classNames(
                           sortOption === option.value
-                            ? "font-medium text-gray-900 dark:text-white"
-                            : "text-gray-500 dark:text-gray-300",
-                          active
-                            ? "bg-gray-100  dark:bg-gray-700 dark:text-white"
-                            : "",
+                            ? "font-medium text-gray-900"
+                            : "text-gray-500",
+                          active ? "bg-gray-100" : "",
                           "block px-4 py-2 text-sm"
                         )}
                         value={option.value}
@@ -406,10 +399,10 @@ export default function AllReviews({ slug }: { slug: string }) {
         </Menu>
         <Menu as="div" className="relative inline-block text-left px-4">
           <div>
-            <Menu.Button className="group inline-flex justify-center text-sm font-medium text-gray-700 hover:text-gray-900 dark:text-white">
+            <Menu.Button className="group inline-flex justify-center text-sm font-medium text-gray-700 hover:text-gray-900">
               Score
               <ChevronDownIcon
-                className="-mr-1 ml-1 h-5 w-5 flex-shrink-0 text-gray-400 group-hover:text-gray-500 dark:text-white dark:group-hover:text-gray-200"
+                className="-mr-1 ml-1 h-5 w-5 flex-shrink-0 text-gray-400 group-hover:text-gray-500"
                 aria-hidden="true"
               />
             </Menu.Button>
@@ -424,7 +417,7 @@ export default function AllReviews({ slug }: { slug: string }) {
             leaveFrom="transform opacity-100 scale-100"
             leaveTo="transform opacity-0 scale-95"
           >
-            <Menu.Items className="absolute right-0 z-10 mt-2 w-40 origin-top-right rounded-md bg-white dark:bg-slate-900 shadow-2xl ring-1 ring-black ring-opacity-5 focus:outline-none">
+            <Menu.Items className="absolute right-0 z-10 mt-2 w-40 origin-top-right rounded-md bg-white shadow-2xl ring-1 ring-black ring-opacity-5 focus:outline-none">
               <div className="py-1">
                 {scoreOptions.map((option, index) => (
                   <Menu.Item key={index}>
@@ -433,11 +426,9 @@ export default function AllReviews({ slug }: { slug: string }) {
                         // key={`scoreOption-${index}`}
                         className={classNames(
                           scoreOption === option.value
-                            ? "font-medium text-gray-900 dark:text-white"
-                            : "text-gray-500 dark:text-gray-300",
-                          active
-                            ? "bg-gray-100  dark:bg-gray-700 dark:text-white"
-                            : "",
+                            ? "font-medium text-gray-900"
+                            : "text-gray-500 ",
+                          active ? "bg-gray-100" : "",
                           "block px-4 py-2 text-sm"
                         )}
                         value={option.value}
@@ -480,7 +471,7 @@ export default function AllReviews({ slug }: { slug: string }) {
         ) : (
           <div className="text-center">
             <Star className="mx-auto h-12 w-12 text-yellow-400" />
-            <h3 className="mt-2 text-sm font-semibold text-gray-900 dark:text-white">
+            <h3 className="mt-2 text-sm font-semibold text-gray-900">
               No {scoreOption} {scoreOption! > 1 ? "Stars" : "Star"} reviews
               yet!
             </h3>
@@ -488,7 +479,7 @@ export default function AllReviews({ slug }: { slug: string }) {
               <Link
                 href={`/new-review/${slug}`}
                 type="button"
-                className="inline-flex items-center rounded-md bg-sky-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-sky-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-600"
+                className="inline-flex items-center rounded-md bg-red-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-red-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-600"
               >
                 <PlusIcon
                   className="-ml-0.5 mr-1.5 h-5 w-5"

@@ -10,5 +10,9 @@ export default function AllApps() {
     return <h1>No Apps found!</h1>;
   }
 
-  return <Apps />;
+  return (
+    <div className="h-screen">
+      <Apps />
+    </div>
+  );
 }

@@ -22,7 +22,7 @@ const FaqItem = ({ index, question, answer }: FAQEntry) => {
       />
       <label
         htmlFor={`faq-${index}`}
-        className="flex w-full items-start justify-between text-left text-gray-900 dark:text-white cursor-pointer"
+        className="flex w-full items-start justify-between text-left text-gray-900 cursor-pointer"
       >
         <span className="text-base font-semibold leading-7">{question}</span>
         <span className="ml-6 h-7 flex items-center">
@@ -30,9 +30,7 @@ const FaqItem = ({ index, question, answer }: FAQEntry) => {
         </span>
       </label>
       <div className="hidden peer-checked:block  mt-2 pr-12">
-        <div className="prose prose-slate dark:prose-invert max-w-none prose-sm">
-          {answer || ""}
-        </div>
+        <div className="max-w-none text-sm">{answer || ""}</div>
       </div>
     </div>
   );
@@ -41,13 +39,10 @@ const FaqItem = ({ index, question, answer }: FAQEntry) => {
 export function Faq({ faqs }: FAQProps) {
   return (
     <section id="faq" aria-labelledby="faq-title" className="scroll-mt-16">
-      <div className="bg-white dark:bg-slate-900 shadow dark:border dark:border-white/20 sm:overflow-hidden sm:rounded-lg">
-        <div className="divide-y divide-gray-200 dark:divide-white/10">
+      <div className="bg-white shadow sm:overflow-hidden sm:rounded-lg">
+        <div className="divide-y divide-gray-200">
           <div className="px-4 py-5 sm:px-6">
-            <h2
-              id="faq-title"
-              className="text-lg font-medium text-gray-900 dark:text-white"
-            >
+            <h2 id="faq-title" className="text-lg font-medium text-gray-900">
               Frequently asked questions
             </h2>
           </div>

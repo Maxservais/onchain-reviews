@@ -16,11 +16,11 @@ export default function Error({
 
   return (
     <main className="mx-auto flex w-full max-w-8xl flex-auto flex-col justify-center px-6 py-24 sm:py-64 lg:px-8">
-      <p className="text-base font-semibold leading-8 text-sky-600">Oops</p>
-      <h1 className="mt-4 text-3xl font-bold tracking-tight text-gray-900 dark:text-white sm:text-5xl">
+      <p className="text-base font-semibold leading-8 text-red-600">Oops</p>
+      <h1 className="mt-4 text-3xl font-bold tracking-tight text-gray-900 sm:text-5xl">
         Oh no, something went wrong...
       </h1>
-      <p className="mt-6 text-base leading-7 text-gray-600 dark:text-gray-200">
+      <p className="mt-6 text-base leading-7 text-gray-600">
         Sorry about the issue! Maybe refresh?
       </p>
       <div className="mt-10">
@@ -29,7 +29,7 @@ export default function Error({
             // Attempt to recover by trying to re-render the segment
             () => reset()
           }
-          className="text-sm font-semibold leading-7 text-sky-600"
+          className="text-sm font-semibold leading-7 text-red-600"
         >
           <span aria-hidden="true">&larr;</span> Try Again
         </button>

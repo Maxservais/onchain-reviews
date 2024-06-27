@@ -37,10 +37,10 @@ export default function SuperchainResources() {
         className="grid grid-cols-1 lg:grid-cols-2 items-center gap-x-8 gap-y-16 mt-24 sm:mt-42"
       >
         <div>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 dark:text-white pb-2">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 pb-2">
             Become Optimistic
           </h2>
-          <p className="text-base text-gray-700 dark:text-gray-300 pb-2 sm:pb-0">
+          <p className="text-base text-gray-700 pb-2 sm:pb-0">
             Discover Optimism&apos;s vision, engage in governance, and find out
             how to earn rewards for your contributions.
           </p>
@@ -48,15 +48,15 @@ export default function SuperchainResources() {
             {resources.map((resource, index) => (
               <div
                 key={index}
-                className="group border-t border-gray-200 pt-2 hover:border-sky-500"
+                className="group border-t border-gray-200 pt-2 hover:border-red-500"
               >
                 <Link href={resource.url} target="_blank noopener noreferrer">
                   <div className="relative">
-                    <dt className="font-medium text-gray-900 dark:text-white group-hover:text-sky-500">
+                    <dt className="font-medium text-gray-900 group-hover:text-red-500">
                       {resource.name}
                     </dt>
                     <RxExternalLink
-                      className="absolute top-1 right-1 h-4 w-4 dark:text-white-400 group-hover:text-sky-500 transition-transform duration-200 ease-in-out group-hover:-translate-y-1 group-hover:translate-x-1"
+                      className="absolute top-1 right-1 h-4 w-4 group-hover:text-red-500 transition-transform duration-200 ease-in-out group-hover:-translate-y-1 group-hover:translate-x-1"
                       title="View Resource"
                     />
                   </div>

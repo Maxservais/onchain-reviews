@@ -33,17 +33,17 @@ export function Success({
           <CheckIcon className="h-6 w-6 text-green-600" aria-hidden="true" />
         </div>
         <div className="mt-3 text-center sm:mt-5">
-          <h3 className="text-2xl font-semibold leading-6 text-gray-900 dark:text-white">
+          <h3 className="text-2xl font-semibold leading-6 text-gray-900">
             Review successful
           </h3>
           <div className="mt-2">
-            <p className="text-sm leading-6 text-gray-600 dark:text-gray-400">
+            <p className="text-sm leading-6 text-gray-600">
               Thanks a lot for sharing your thoughts, your review has been
               successfully submitted. You can view the transaction on {}
             </p>
             <a
               href={`${explorer}/attestation/view/${newAttestationUID}`}
-              className="text-sm text-sky-600 font-medium hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-600"
+              className="text-sm text-red-600 font-medium hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-600"
               target="_blank"
             >
               easscan
@@ -55,7 +55,7 @@ export function Success({
         <Link
           href={`/apps/${slug}`}
           type="button"
-          className="inline-flex w-full justify-center rounded-md bg-sky-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-sky-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-600 sm:col-start-2"
+          className="inline-flex w-full justify-center rounded-md bg-red-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-red-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-600 sm:col-start-2"
         >
           Show me all Reviews
         </Link>

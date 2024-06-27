@@ -9,12 +9,12 @@ export default function SuperchainStats() {
     <div className="max-w-8xl mx-auto px-4 sm:px-6 lg:px-8 py-4 md:py-6 lg:py-8">
       <div className="grid grid-cols-1 lg:grid-cols-2 items-center gap-x-8 gap-y-16 mt-24 sm:mt-42">
         <div>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 dark:text-white pb-2">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 pb-2">
             Superchain in Numbers
           </h2>
           <div className="flex flex-col gap-x-8 gap-y-20 lg:flex-row">
             <div className="lg:w-full lg:max-w-2xl lg:flex-auto">
-              <p className="text-base text-gray-700 dark:text-gray-300 pb-2 sm:pb-0">
+              <p className="text-base text-gray-700 pb-2 sm:pb-0">
                 The superchain is home to hundreds of awesome Apps and secures
                 billions of dollars in value. Scaling together, not apart.
               </p>
@@ -25,10 +25,10 @@ export default function SuperchainStats() {
                       key={stat.label}
                       className="flex flex-col-reverse gap-y-4"
                     >
-                      <dt className="text-base leading-7 text-gray-600 dark:text-gray-300">
+                      <dt className="text-base leading-7 text-gray-600">
                         {stat.label}
                       </dt>
-                      <dd className="text-3xl sm:text-5xl font-semibold tracking-tight text-gray-900 dark:text-white">
+                      <dd className="text-3xl sm:text-5xl font-semibold tracking-tight text-gray-900">
                         {stat.value}
                       </dd>
                     </div>

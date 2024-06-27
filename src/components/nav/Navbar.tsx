@@ -1,7 +1,5 @@
 "use client";
 
-import { map } from "@trpc/server/observable";
-import { url } from "inspector";
 import Link from "next/link";
 import { useState } from "react";
 
@@ -15,8 +13,8 @@ export const items = [
     url: "/apps",
   },
   {
-    name: "Add a Review",
-    url: "/new-review",
+    name: "About",
+    url: "/about",
   },
 ];
 
@@ -24,21 +22,23 @@ export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   return (
-    <nav className="bg-white shadow-sm">
+    <nav className="bg-gray-50 shadow-sm">
       <div className="max-w-8xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           <div className="flex items-center">
-            <span className="text-red-500 font-bold text-xl">SUPERCHAIN</span>
+            <Link href={"/"} className="text-red-500 font-bold text-xl">
+              SUPERCHAIN
+            </Link>
           </div>
 
           {/* Desktop menu */}
-          <div className="hidden md:block">
-            <div className="flex items-center space-x-3 bg-gray-100 rounded-full p-1">
+          <div className="hidden md:block ">
+            <div className="flex items-center space-x-3 bg-white rounded-full p-1">
               {items?.map((item) => (
                 <Link
                   key={item.name}
                   href={item.url}
-                  className="text-gray-700 hover:bg-white hover:text-red-500 px-3 py-2 rounded-full text-md font-medium transition-colors duration-200"
+                  className="text-gray-700 hover:bg-gray-100 hover:text-red-500 px-5 py-2 rounded-full text-md font-medium transition-colors duration-200"
                 >
                   {item.name}
                 </Link>
@@ -47,9 +47,27 @@ export default function Navbar() {
           </div>
 
           <div className="hidden md:block">
-            <button className="bg-red-500 hover:bg-red-600 text-white font-medium py-2 px-4 rounded-full transition-colors duration-200">
-              Create Wallet
-            </button>
+            <Link
+              href="https://github.com/Maxservais/onchain-reviews"
+              target="_blank"
+              className="inline-flex items-center bg-red-500 hover:bg-red-600 text-white font-medium py-2 px-4 rounded-full transition-colors duration-200"
+            >
+              View on Github
+              <svg
+                className="ml-2 w-4 h-4"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
+                />
+              </svg>
+            </Link>
           </div>
 
           {/* Mobile menu button */}

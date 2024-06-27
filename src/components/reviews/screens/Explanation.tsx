@@ -8,7 +8,7 @@ import { Dispatch, SetStateAction } from "react";
 
 import { scrollToTop } from "@/lib/utils";
 
-import { Status } from "../../../app/new-review/[slug]/AddReview";
+import { Status } from "../../../app/new-review/[slug]/NewReview";
 
 const features = [
   {
@@ -45,25 +45,25 @@ export function Explanation({
     <div className="h-1/2">
       <div>
         <div className="col-span-full py-4">
-          <p className="block text-base font-semibold leading-7 text-gray-900 dark:text-white">
+          <p className="block text-base font-semibold leading-7 text-gray-900">
             Your insights are invaluable.
           </p>
-          <p className="mt-1 text-sm leading-6 text-gray-600 dark:text-gray-300">
+          <p className="mt-1 text-sm leading-6 text-gray-600">
             Visitors come to Ethereum Ecosystem to explore a wide range of apps
             and tools within the Ethereum ecosystem. By sharing your
             experiences, you can guide others in making informed decisions.
           </p>
         </div>
         <div className="col-span-full py-4">
-          <p className="block text-base font-semibold leading-7 text-gray-900 dark:text-white">
+          <p className="block text-base font-semibold leading-7 text-gray-900">
             Why contribute a review to Ethereum Ecosystem?
           </p>
-          <dl className="max-w-xl space-y-1 mt-2 text-gray-600 dark:text-gray-300 lg:max-w-none">
+          <dl className="max-w-xl space-y-1 mt-2 text-gray-600 lg:max-w-none">
             {features.map((feature) => (
               <div key={feature.name} className="relative pl-9">
                 <dt className="inline font-semibold text-sm">
                   <feature.icon
-                    className="absolute left-1 top-1 h-5 w-5 text-sky-600 dark:text-sky-500"
+                    className="absolute left-1 top-1 h-5 w-5 text-red-600"
                     aria-hidden="true"
                   />
                   {feature.name}
@@ -74,10 +74,10 @@ export function Explanation({
           </dl>
         </div>
         <div className="col-span-full py-4">
-          <p className="block text-base font-semibold leading-7 text-gray-900 dark:text-white">
+          <p className="block text-base font-semibold leading-7 text-gray-900">
             What&apos;s next?
           </p>
-          <p className="mt-1 text-sm leading-6 text-gray-600 dark:text-gray-300">
+          <p className="mt-1 text-sm leading-6 text-gray-600">
             To proceed, prepare your wallet and ensure you have some ETH on OP
             Mainnet, a Layer 2 solution. Your review will be recorded on the
             blockchain, making your contribution both enduring and valuable to
@@ -86,10 +86,10 @@ export function Explanation({
           </p>
         </div>
         <div className="col-span-full py-4">
-          <p className="block text-base font-semibold leading-7 text-gray-900 dark:text-white">
+          <p className="block text-base font-semibold leading-7 text-gray-900">
             Why should I pay to review?
           </p>
-          <p className="mt-1 text-sm leading-6 text-gray-600 dark:text-gray-300">
+          <p className="mt-1 text-sm leading-6 text-gray-600">
             We don&apos;t charge any fees. However, using the blockchain incurs
             some minimal costs, usually just a few cents. This small fee helps
             cover the blockchain transaction cost and prevents spam, ensuring
@@ -100,7 +100,7 @@ export function Explanation({
       <div className="mt-4 sm:mt-5 sm:grid sm:grid-flow-row-dense sm:grid-cols-2 sm:gap-3">
         <button
           type="button"
-          className="inline-flex w-full justify-center rounded-md bg-sky-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-sky-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-600 sm:col-start-2"
+          className="inline-flex w-full justify-center rounded-md bg-red-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-red-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-600 sm:col-start-2"
           onClick={handleAddReviewClick}
         >
           Write a Review

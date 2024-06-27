@@ -20,8 +20,8 @@ type AppProps = {
 
 export function AppGrid({ app }: AppProps) {
   return (
-    <div className="group relative flex flex-col h-full rounded-2xl border border-slate-200 bg-white dark:bg-slate-900 dark:border-white/20 transition-shadow hover:shadow-md hover:shadow-zinc-900/5 dark:bg-white/2.5 dark:hover:shadow-black/5">
-      <div className="absolute inset-0 rounded-2xl border-2 border-transparent opacity-0 [background:linear-gradient(var(--quick-links-hover-bg,theme(colors.sky.50)),var(--quick-links-hover-bg,theme(colors.sky.50)))_padding-box,linear-gradient(to_top,theme(colors.indigo.400),theme(colors.cyan.400),theme(colors.sky.500))_border-box] group-hover:opacity-100 dark:[--quick-links-hover-bg:theme(colors.slate.800)]" />
+    <div className="group relative flex flex-col h-full rounded-2xl border border-slate-200 bg-white transition-shadow hover:shadow-md hover:shadow-zinc-900/5">
+      <div className="absolute inset-0 rounded-2xl border-2 border-transparent opacity-0 [background:linear-gradient(var(--quick-links-hover-bg,theme(colors.red.50)),var(--quick-links-hover-bg,theme(colors.red.50)))_padding-box,linear-gradient(to_top,theme(colors.red.400),theme(colors.red.500),theme(colors.red.600))_border-box] group-hover:opacity-100" />
       <Link
         key={delve(app, "slug")}
         href={`/apps/${delve(app, "slug")}`}
@@ -37,16 +37,16 @@ export function AppGrid({ app }: AppProps) {
               width={128}
             />
             <div className="ml-5 mr-auto">
-              <h3 className="text-xl ml-1 mb-2 font-semibold text-gray-900 dark:text-white">
+              <h3 className="text-xl ml-1 mb-2 font-semibold text-gray-900">
                 {delve(app, "name")}
               </h3>
             </div>
             <RxExternalLink
-              className="absolute top-6 right-6 h-4 w-4 text-sky-400 hover:text-sky-600"
+              className="absolute top-6 right-6 h-4 w-4 text-red-400 hover:text-red-600"
               title="View Page"
             />
           </div>
-          <div className="text-base line-clamp-3 pt-4 leading-relaxed text-gray-600 dark:text-gray-300">
+          <div className="text-base line-clamp-3 pt-4 leading-relaxed text-gray-600">
             <p>{delve(app, "description")}</p>
           </div>
         </div>
@@ -59,7 +59,7 @@ export function AppGrid({ app }: AppProps) {
             rel="noopener noreferrer"
             className="inline-flex items-center justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
           >
-            <FaXTwitter className="h-5 w-5 text-gray-400 hover:text-sky-300" />
+            <FaXTwitter className="h-5 w-5 text-gray-400 hover:text-red-300" />
           </Link>
           <Link
             href={delve(app, "website")}
@@ -67,9 +67,15 @@ export function AppGrid({ app }: AppProps) {
             rel="noopener noreferrer"
             className="inline-flex items-center justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
           >
-            <RxGlobe className="h-5 w-5 text-gray-400 hover:text-sky-300" />
+            <RxGlobe className="h-5 w-5 text-gray-400 hover:text-red-300" />
           </Link>
         </div>
+        <Link
+          href={`/new-review/${delve(app, "slug")}`}
+          className="inline-flex items-center justify-center rounded-md bg-white px-3 py-2 text-sm text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
+        >
+          Review
+        </Link>
       </div>
     </div>
   );
@@ -93,17 +99,18 @@ export default function Apps({
     >
       <div className="flex flex-col sm:flex-row items-start sm:items-end justify-between pb-4 mt-24 sm:mt-42">
         <div>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 dark:text-white pb-2">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 pb-2">
             Some popular Apps
           </h2>
-          <p className="text-base text-gray-700 dark:text-gray-300 pb-2 sm:pb-0">
-            A collection of some popular apps part of the Superchain ecosystem.
+          <p className="text-base text-gray-700 pb-2 sm:pb-0">
+            A collection of some popular apps you can leave a review for - 100%
+            onchain.
           </p>
         </div>
         {displayLink && (
           <Link
             href="/apps"
-            className="whitespace-nowrap text-sm font-medium text-sky-600 hover:text-sky-500 dark:text-sky-500 dark:hover:text-sky-400"
+            className="whitespace-nowrap text-sm font-medium text-red-600 hover:text-red-500"
           >
             View all Apps
             <span aria-hidden="true"> &rarr;</span>
