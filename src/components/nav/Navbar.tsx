@@ -1,7 +1,8 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
+import { Router } from "next/router";
+import { useEffect, useState } from "react";
 
 export const items = [
   {
@@ -123,6 +124,7 @@ export default function Navbar() {
               <Link
                 key={item.name}
                 href={item.url}
+                onClick={() => setIsMenuOpen(false)}
                 className="text-gray-700 hover:bg-gray-100 block px-3 py-2 rounded-md text-base font-medium"
               >
                 {item.name}

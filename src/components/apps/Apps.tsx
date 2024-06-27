@@ -29,15 +29,17 @@ export function AppGrid({ app }: AppProps) {
       >
         <div className="relative px-6 pt-6">
           <div className="flex items-center">
-            <img
-              className="flex-shrink-0 w-16 h-auto rounded-2xl"
-              src={delve(app, "logoUrl")}
-              alt={"App image"}
-              height={128}
-              width={128}
-            />
-            <div className="ml-5 mr-auto">
-              <h3 className="text-xl ml-1 mb-2 font-semibold text-gray-900">
+            {app?.logoUrl && (
+              <img
+                className="flex-shrink-0 w-16 h-auto mr-5 rounded-2xl"
+                src={delve(app, "logoUrl")}
+                alt={"App image"}
+                height={128}
+                width={128}
+              />
+            )}
+            <div className="mr-auto">
+              <h3 className="text-xl mb-2 font-semibold text-gray-900">
                 {delve(app, "name")}
               </h3>
             </div>
@@ -47,28 +49,32 @@ export function AppGrid({ app }: AppProps) {
             />
           </div>
           <div className="text-base line-clamp-3 pt-4 leading-relaxed text-gray-600">
-            <p>{delve(app, "description")}</p>
+            <p>{delve(app, "description") ?? "No description yet."}</p>
           </div>
         </div>
       </Link>
       <div className="flex justify-between items-center px-6 py-4 z-10">
         <div className="flex w-full items-center space-x-0.5 sm:space-x-1.5 justify-stretch">
-          <Link
-            href={delve(app, "twitter")}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
-          >
-            <FaXTwitter className="h-5 w-5 text-gray-400 hover:text-red-300" />
-          </Link>
-          <Link
-            href={delve(app, "website")}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
-          >
-            <RxGlobe className="h-5 w-5 text-gray-400 hover:text-red-300" />
-          </Link>
+          {app?.twitter && (
+            <Link
+              href={delve(app, "twitter")}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
+            >
+              <FaXTwitter className="h-5 w-5 text-gray-400 hover:text-red-300" />
+            </Link>
+          )}
+          {app?.website && (
+            <Link
+              href={delve(app, "website")}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
+            >
+              <RxGlobe className="h-5 w-5 text-gray-400 hover:text-red-300" />
+            </Link>
+          )}
         </div>
         <Link
           href={`/new-review/${delve(app, "slug")}`}
@@ -95,9 +101,9 @@ export default function Apps({
   return (
     <div
       id="apps"
-      className="max-w-8xl mx-auto px-4 sm:px-6 lg:px-8 py-4 md:py-6 lg:py-8"
+      className="max-w-8xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16 lg:py-20"
     >
-      <div className="flex flex-col sm:flex-row items-start sm:items-end justify-between pb-4 mt-24 sm:mt-42">
+      <div className="flex flex-col sm:flex-row items-start sm:items-end justify-between pb-4">
         <div>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 pb-2">
             Some popular Apps

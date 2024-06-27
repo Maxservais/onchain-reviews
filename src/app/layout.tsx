@@ -40,9 +40,11 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <Providers>
-          <Navbar />
-          <main className="bg-gray-50">{children}</main>
-          <Footer />
+          <div className="flex flex-col min-h-screen">
+            <Navbar />
+            <main className="flex-grow bg-gray-50">{children}</main>
+            <Footer />
+          </div>
         </Providers>
       </body>
     </html>

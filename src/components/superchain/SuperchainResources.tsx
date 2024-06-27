@@ -31,10 +31,13 @@ const resources = [
 
 export default function SuperchainResources() {
   return (
-    <div className="max-w-8xl mx-auto px-4 sm:px-6 lg:px-8 py-4 md:py-6 lg:py-8">
+    <div
+      id="resources"
+      className="max-w-8xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16 lg:py-20"
+    >
       <div
         id="learn-more"
-        className="grid grid-cols-1 lg:grid-cols-2 items-center gap-x-8 gap-y-16 mt-24 sm:mt-42"
+        className="grid grid-cols-1 lg:grid-cols-2 items-center gap-x-8 gap-y-16"
       >
         <div>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 pb-2">
