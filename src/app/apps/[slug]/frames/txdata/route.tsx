@@ -53,7 +53,7 @@ export async function POST(
   });
 
   return NextResponse.json({
-    chainId: "eip155:8453", // "eip155:10" = OP Mainnet 10
+    chainId: "eip155:10", // OP Mainnet
     method: "eth_sendTransaction",
     params: {
       abi: easABI as Abi,
