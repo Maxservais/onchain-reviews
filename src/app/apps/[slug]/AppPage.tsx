@@ -1,8 +1,9 @@
 "use client";
 
+import Link from "next/link";
+
 import { trpc } from "@/app/_trpc/client";
 import Reviews from "@/components/reviews/Reviews";
-import Link from "next/link";
 
 export default function AppPage({ slug }: { slug: string }) {
   const { data: app } = trpc.appsRouter.getApp.useQuery({
