@@ -307,8 +307,6 @@ export default function AllReviews({ slug }: { slug: string }) {
               <ReviewSkeleton />
               <ReviewSkeleton />
               <ReviewSkeleton />
-              <ReviewSkeleton />
-              <ReviewSkeleton />
             </div>
           </div>
         </div>

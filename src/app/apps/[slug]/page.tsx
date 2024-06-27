@@ -12,7 +12,18 @@ import AppPage from "./AppPage";
 export default async function Page({ params }: { params: { slug: string } }) {
   const helper = await createSSRHelper();
 
+  // Prefetch the tRPC procedures server-side
   await helper.appsRouter.getApp.prefetch({
+    appSlug: params.slug,
+  });
+
+  await helper.reviewsRouter.getAppReviews.prefetchInfinite({
+    appSlug: params.slug,
+    recency: "mostRecent",
+    limit: 5,
+  });
+
+  await helper.reviewsRouter.getReviewStats.prefetch({
     appSlug: params.slug,
   });
 
