@@ -9,6 +9,7 @@
     "lint": "next lint",
     "codegen": "graphql-codegen --config codegen.ts",
     "importApps": "tsx src/scripts/importApps.ts",
+    "exportApps": "tsx src/scripts/exportApps.ts",
     "importDebank": "tsx src/scripts/importDebank.ts"
   },
   "dependencies": {

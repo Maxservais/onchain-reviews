@@ -1,0 +1,542 @@
+[
+  {
+    "slug": "argent",
+    "name": "Argent",
+    "description": null,
+    "website": null,
+    "twitter": null,
+    "logoUrl": null,
+    "lastModificationDate": "2024-06-27T16:07:47.659Z",
+    "creationDate": "2024-06-27T15:05:09.852Z"
+  },
+  {
+    "slug": "open-sea",
+    "name": "OpenSea",
+    "description": null,
+    "website": null,
+    "twitter": null,
+    "logoUrl": null,
+    "lastModificationDate": "2024-06-27T16:07:47.725Z",
+    "creationDate": "2024-06-27T15:05:09.852Z"
+  },
+  {
+    "slug": "chainlink",
+    "name": "Chainlink",
+    "description": null,
+    "website": null,
+    "twitter": null,
+    "logoUrl": null,
+    "lastModificationDate": "2024-06-27T16:07:48.343Z",
+    "creationDate": "2024-06-27T15:05:09.852Z"
+  },
+  {
+    "slug": "magic-eden",
+    "name": "Magic Eden",
+    "description": null,
+    "website": null,
+    "twitter": null,
+    "logoUrl": null,
+    "lastModificationDate": "2024-06-27T16:07:48.408Z",
+    "creationDate": "2024-06-27T15:05:09.852Z"
+  },
+  {
+    "slug": "galxe",
+    "name": "Galxe",
+    "description": null,
+    "website": null,
+    "twitter": null,
+    "logoUrl": null,
+    "lastModificationDate": "2024-06-27T16:07:48.472Z",
+    "creationDate": "2024-06-27T15:05:09.852Z"
+  },
+  {
+    "slug": "kyberswap",
+    "name": "Kyberswap",
+    "description": null,
+    "website": null,
+    "twitter": null,
+    "logoUrl": null,
+    "lastModificationDate": "2024-06-27T16:07:48.536Z",
+    "creationDate": "2024-06-27T15:05:09.852Z"
+  },
+  {
+    "slug": "mexc-global",
+    "name": "MEXC Global",
+    "description": null,
+    "website": null,
+    "twitter": null,
+    "logoUrl": null,
+    "lastModificationDate": "2024-06-27T16:07:47.798Z",
+    "creationDate": "2024-06-27T15:05:09.852Z"
+  },
+  {
+    "slug": "orbiter-finance",
+    "name": "Orbiter Finance",
+    "description": null,
+    "website": null,
+    "twitter": null,
+    "logoUrl": null,
+    "lastModificationDate": "2024-06-27T16:07:47.868Z",
+    "creationDate": "2024-06-27T15:05:09.852Z"
+  },
+  {
+    "slug": "meta-mask",
+    "name": "MetaMask",
+    "description": null,
+    "website": null,
+    "twitter": null,
+    "logoUrl": null,
+    "lastModificationDate": "2024-06-27T16:07:47.935Z",
+    "creationDate": "2024-06-27T15:05:09.852Z"
+  },
+  {
+    "slug": "ledger",
+    "name": "Ledger",
+    "description": null,
+    "website": null,
+    "twitter": null,
+    "logoUrl": null,
+    "lastModificationDate": "2024-06-27T16:07:48.008Z",
+    "creationDate": "2024-06-27T15:05:09.852Z"
+  },
+  {
+    "slug": "rarible",
+    "name": "Rarible",
+    "description": null,
+    "website": null,
+    "twitter": null,
+    "logoUrl": null,
+    "lastModificationDate": "2024-06-27T16:07:48.078Z",
+    "creationDate": "2024-06-27T15:05:09.852Z"
+  },
+  {
+    "slug": "velodrome",
+    "name": "Velodrome",
+    "description": null,
+    "website": null,
+    "twitter": null,
+    "logoUrl": null,
+    "lastModificationDate": "2024-06-27T16:07:48.146Z",
+    "creationDate": "2024-06-27T15:05:09.852Z"
+  },
+  {
+    "slug": "kraken",
+    "name": "Kraken",
+    "description": null,
+    "website": null,
+    "twitter": null,
+    "logoUrl": null,
+    "lastModificationDate": "2024-06-27T16:07:48.214Z",
+    "creationDate": "2024-06-27T15:05:09.852Z"
+  },
+  {
+    "slug": "rabbit-x",
+    "name": "RabbitX",
+    "description": null,
+    "website": null,
+    "twitter": null,
+    "logoUrl": null,
+    "lastModificationDate": "2024-06-27T16:07:48.278Z",
+    "creationDate": "2024-06-27T15:05:09.852Z"
+  },
+  {
+    "slug": "curve-finance",
+    "name": "Curve Finance",
+    "description": null,
+    "website": null,
+    "twitter": null,
+    "logoUrl": null,
+    "lastModificationDate": "2024-06-27T16:07:48.605Z",
+    "creationDate": "2024-06-27T15:05:09.852Z"
+  },
+  {
+    "slug": "premint",
+    "name": "Premint",
+    "description": null,
+    "website": null,
+    "twitter": null,
+    "logoUrl": null,
+    "lastModificationDate": "2024-06-27T16:07:48.672Z",
+    "creationDate": "2024-06-27T15:05:09.852Z"
+  },
+  {
+    "slug": "bybit",
+    "name": "Bybit",
+    "description": null,
+    "website": null,
+    "twitter": null,
+    "logoUrl": null,
+    "lastModificationDate": "2024-06-27T16:07:48.739Z",
+    "creationDate": "2024-06-27T15:05:09.852Z"
+  },
+  {
+    "slug": "cowswap",
+    "name": "Cowswap",
+    "description": null,
+    "website": null,
+    "twitter": null,
+    "logoUrl": null,
+    "lastModificationDate": "2024-06-27T16:07:48.806Z",
+    "creationDate": "2024-06-27T15:05:09.852Z"
+  },
+  {
+    "slug": "coinbase",
+    "name": "coinbase",
+    "description": null,
+    "website": null,
+    "twitter": null,
+    "logoUrl": null,
+    "lastModificationDate": "2024-06-27T16:07:48.876Z",
+    "creationDate": "2024-06-27T15:05:09.852Z"
+  },
+  {
+    "slug": "ekubo",
+    "name": "Ekubo",
+    "description": null,
+    "website": null,
+    "twitter": null,
+    "logoUrl": null,
+    "lastModificationDate": "2024-06-27T16:07:48.942Z",
+    "creationDate": "2024-06-27T15:05:09.852Z"
+  },
+  {
+    "slug": "aave-protocol",
+    "name": "Aave Protocol",
+    "description": null,
+    "website": null,
+    "twitter": null,
+    "logoUrl": null,
+    "lastModificationDate": "2024-06-27T16:07:49.007Z",
+    "creationDate": "2024-06-27T15:05:09.852Z"
+  },
+  {
+    "slug": "huobi",
+    "name": "Huobi",
+    "description": null,
+    "website": null,
+    "twitter": null,
+    "logoUrl": null,
+    "lastModificationDate": "2024-06-27T16:07:49.074Z",
+    "creationDate": "2024-06-27T15:05:09.852Z"
+  },
+  {
+    "slug": "unframed",
+    "name": "Unframed",
+    "description": null,
+    "website": null,
+    "twitter": null,
+    "logoUrl": null,
+    "lastModificationDate": "2024-06-27T16:07:49.137Z",
+    "creationDate": "2024-06-27T15:05:09.852Z"
+  },
+  {
+    "slug": "robinhood",
+    "name": "Robinhood",
+    "description": null,
+    "website": null,
+    "twitter": null,
+    "logoUrl": null,
+    "lastModificationDate": "2024-06-27T16:07:49.201Z",
+    "creationDate": "2024-06-27T15:05:09.852Z"
+  },
+  {
+    "slug": "argent-x",
+    "name": "Argent X",
+    "description": null,
+    "website": null,
+    "twitter": null,
+    "logoUrl": null,
+    "lastModificationDate": "2024-06-27T16:07:49.267Z",
+    "creationDate": "2024-06-27T15:05:09.852Z"
+  },
+  {
+    "slug": "velodrome-finance",
+    "name": "Velodrome Finance",
+    "description": null,
+    "website": null,
+    "twitter": null,
+    "logoUrl": null,
+    "lastModificationDate": "2024-06-27T16:07:49.333Z",
+    "creationDate": "2024-06-27T15:05:09.852Z"
+  },
+  {
+    "slug": "binance",
+    "name": "Binance",
+    "description": null,
+    "website": null,
+    "twitter": null,
+    "logoUrl": null,
+    "lastModificationDate": "2024-06-27T16:07:49.400Z",
+    "creationDate": "2024-06-27T15:05:09.852Z"
+  },
+  {
+    "slug": "sync-swap",
+    "name": "SyncSwap",
+    "description": null,
+    "website": null,
+    "twitter": null,
+    "logoUrl": null,
+    "lastModificationDate": "2024-06-27T16:07:49.467Z",
+    "creationDate": "2024-06-27T15:05:09.852Z"
+  },
+  {
+    "slug": "1inch",
+    "name": "1inch",
+    "description": null,
+    "website": null,
+    "twitter": null,
+    "logoUrl": null,
+    "lastModificationDate": "2024-06-27T16:07:49.534Z",
+    "creationDate": "2024-06-27T15:05:09.852Z"
+  },
+  {
+    "slug": "bitpanda",
+    "name": "Bitpanda",
+    "description": null,
+    "website": null,
+    "twitter": null,
+    "logoUrl": null,
+    "lastModificationDate": "2024-06-27T16:07:49.599Z",
+    "creationDate": "2024-06-27T15:05:09.852Z"
+  },
+  {
+    "slug": "argent-portfolio",
+    "name": "Argent Portfolio",
+    "description": null,
+    "website": null,
+    "twitter": null,
+    "logoUrl": null,
+    "lastModificationDate": "2024-06-27T16:07:49.663Z",
+    "creationDate": "2024-06-27T15:05:09.852Z"
+  },
+  {
+    "slug": "sith-swap",
+    "name": "SithSwap",
+    "description": null,
+    "website": null,
+    "twitter": null,
+    "logoUrl": null,
+    "lastModificationDate": "2024-06-27T16:07:49.728Z",
+    "creationDate": "2024-06-27T15:05:09.852Z"
+  },
+  {
+    "slug": "socketscan",
+    "name": "Socketscan",
+    "description": null,
+    "website": null,
+    "twitter": null,
+    "logoUrl": null,
+    "lastModificationDate": "2024-06-27T16:07:49.793Z",
+    "creationDate": "2024-06-27T15:05:09.852Z"
+  },
+  {
+    "slug": "frenpet",
+    "name": "Frenpet",
+    "description": null,
+    "website": null,
+    "twitter": null,
+    "logoUrl": null,
+    "lastModificationDate": "2024-06-27T16:07:49.856Z",
+    "creationDate": "2024-06-27T15:05:09.852Z"
+  },
+  {
+    "slug": "starknet-gas-price-tracker",
+    "name": "Starknet Gas Price Tracker",
+    "description": null,
+    "website": null,
+    "twitter": null,
+    "logoUrl": null,
+    "lastModificationDate": "2024-06-27T16:07:49.921Z",
+    "creationDate": "2024-06-27T15:05:09.852Z"
+  },
+  {
+    "slug": "unruggable-meme",
+    "name": "Unruggable Meme",
+    "description": null,
+    "website": null,
+    "twitter": null,
+    "logoUrl": null,
+    "lastModificationDate": "2024-06-27T16:07:49.989Z",
+    "creationDate": "2024-06-27T15:05:09.852Z"
+  },
+  {
+    "slug": "kucoin",
+    "name": "Kucoin",
+    "description": null,
+    "website": null,
+    "twitter": null,
+    "logoUrl": null,
+    "lastModificationDate": "2024-06-27T16:07:50.058Z",
+    "creationDate": "2024-06-27T15:05:09.852Z"
+  },
+  {
+    "slug": "zerion",
+    "name": "Zerion",
+    "description": null,
+    "website": null,
+    "twitter": null,
+    "logoUrl": null,
+    "lastModificationDate": "2024-06-27T16:07:50.126Z",
+    "creationDate": "2024-06-27T15:05:09.852Z"
+  },
+  {
+    "slug": "impersonator",
+    "name": "Impersonator",
+    "description": null,
+    "website": null,
+    "twitter": null,
+    "logoUrl": null,
+    "lastModificationDate": "2024-06-27T16:07:50.196Z",
+    "creationDate": "2024-06-27T15:05:09.852Z"
+  },
+  {
+    "slug": "lyra",
+    "name": "Lyra",
+    "description": null,
+    "website": null,
+    "twitter": null,
+    "logoUrl": null,
+    "lastModificationDate": "2024-06-27T16:07:50.267Z",
+    "creationDate": "2024-06-27T15:05:09.852Z"
+  },
+  {
+    "slug": "paraswap",
+    "name": "Paraswap",
+    "description": null,
+    "website": null,
+    "twitter": null,
+    "logoUrl": null,
+    "lastModificationDate": "2024-06-27T16:07:50.336Z",
+    "creationDate": "2024-06-27T15:05:09.852Z"
+  },
+  {
+    "slug": "synthetix",
+    "name": "Synthetix",
+    "description": null,
+    "website": null,
+    "twitter": null,
+    "logoUrl": null,
+    "lastModificationDate": "2024-06-27T16:07:50.405Z",
+    "creationDate": "2024-06-27T15:05:09.852Z"
+  },
+  {
+    "slug": "friend-tech",
+    "name": "Friend.tech",
+    "description": null,
+    "website": null,
+    "twitter": null,
+    "logoUrl": null,
+    "lastModificationDate": "2024-06-27T16:07:50.474Z",
+    "creationDate": "2024-06-27T15:05:09.852Z"
+  },
+  {
+    "slug": "snapshot",
+    "name": "Snapshot",
+    "description": null,
+    "website": null,
+    "twitter": null,
+    "logoUrl": null,
+    "lastModificationDate": "2024-06-27T16:07:50.547Z",
+    "creationDate": "2024-06-27T15:05:09.852Z"
+  },
+  {
+    "slug": "beaconchain",
+    "name": " beaconchain",
+    "description": null,
+    "website": null,
+    "twitter": null,
+    "logoUrl": null,
+    "lastModificationDate": "2024-06-27T16:07:50.689Z",
+    "creationDate": "2024-06-27T15:05:09.852Z"
+  },
+  {
+    "slug": "coinbase-wallet",
+    "name": "Coinbase Wallet",
+    "description": null,
+    "website": null,
+    "twitter": null,
+    "logoUrl": null,
+    "lastModificationDate": "2024-06-27T16:07:50.757Z",
+    "creationDate": "2024-06-27T15:05:09.852Z"
+  },
+  {
+    "slug": "rainbow",
+    "name": "Rainbow",
+    "description": null,
+    "website": null,
+    "twitter": null,
+    "logoUrl": null,
+    "lastModificationDate": "2024-06-27T16:07:50.826Z",
+    "creationDate": "2024-06-27T15:05:09.852Z"
+  },
+  {
+    "slug": "nansen",
+    "name": "Nansen",
+    "description": null,
+    "website": null,
+    "twitter": null,
+    "logoUrl": null,
+    "lastModificationDate": "2024-06-27T16:07:50.895Z",
+    "creationDate": "2024-06-27T15:05:09.852Z"
+  },
+  {
+    "slug": "perpetual-protocol",
+    "name": "Perpetual Protocol",
+    "description": null,
+    "website": null,
+    "twitter": null,
+    "logoUrl": null,
+    "lastModificationDate": "2024-06-27T16:07:50.963Z",
+    "creationDate": "2024-06-27T15:05:09.852Z"
+  },
+  {
+    "slug": "avnu",
+    "name": "AVNU",
+    "description": null,
+    "website": null,
+    "twitter": null,
+    "logoUrl": null,
+    "lastModificationDate": "2024-06-27T16:07:51.037Z",
+    "creationDate": "2024-06-27T15:05:09.852Z"
+  },
+  {
+    "slug": "zapper",
+    "name": "zapper",
+    "description": null,
+    "website": null,
+    "twitter": null,
+    "logoUrl": null,
+    "lastModificationDate": "2024-06-27T16:07:51.103Z",
+    "creationDate": "2024-06-27T15:05:09.852Z"
+  },
+  {
+    "slug": "bridge-wallet",
+    "name": "Bridge Wallet",
+    "description": null,
+    "website": null,
+    "twitter": null,
+    "logoUrl": null,
+    "lastModificationDate": "2024-06-27T16:07:51.171Z",
+    "creationDate": "2024-06-27T15:05:09.852Z"
+  },
+  {
+    "slug": "compound",
+    "name": "Compound",
+    "description": null,
+    "website": null,
+    "twitter": null,
+    "logoUrl": null,
+    "lastModificationDate": "2024-06-27T16:07:47.440Z",
+    "creationDate": "2024-06-26T09:04:11.840Z"
+  },
+  {
+    "slug": "uniswap",
+    "name": "Uniswap",
+    "description": null,
+    "website": "fzzefze",
+    "twitter": "zfzfeezf",
+    "logoUrl": null,
+    "lastModificationDate": "2024-06-27T16:07:46.998Z",
+    "creationDate": "2024-06-26T09:04:11.437Z"
+  }
+]

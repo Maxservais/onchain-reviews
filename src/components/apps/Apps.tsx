@@ -48,13 +48,21 @@ export function AppGrid({ app }: AppProps) {
               title="View Page"
             />
           </div>
-          <div className="text-base line-clamp-3 pt-4 leading-relaxed text-gray-600">
-            <p>{delve(app, "description") ?? "No description yet."}</p>
-          </div>
+          {app?.description && (
+            <div className="text-base line-clamp-3 pt-4 leading-relaxed text-gray-600">
+              <p>{delve(app, "description")}</p>
+            </div>
+          )}
         </div>
       </Link>
       <div className="flex justify-between items-center px-6 py-4 z-10">
-        <div className="flex w-full items-center space-x-0.5 sm:space-x-1.5 justify-stretch">
+        <Link
+          href={`/new-review/${delve(app, "slug")}`}
+          className="inline-flex items-center justify-center rounded-md bg-white px-3 py-2 text-sm text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
+        >
+          Review
+        </Link>
+        <div className="flex w-full items-center space-x-0.5 sm:space-x-1.5 justify-end">
           {app?.twitter && (
             <Link
               href={delve(app, "twitter")}
@@ -76,12 +84,6 @@ export function AppGrid({ app }: AppProps) {
             </Link>
           )}
         </div>
-        <Link
-          href={`/new-review/${delve(app, "slug")}`}
-          className="inline-flex items-center justify-center rounded-md bg-white px-3 py-2 text-sm text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
-        >
-          Review
-        </Link>
       </div>
     </div>
   );

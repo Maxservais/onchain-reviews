@@ -3,9 +3,11 @@ import "@/db/envConfig";
 import slugify from "@sindresorhus/slugify";
 import { sql } from "@vercel/postgres";
 import { fromUnixTime, getUnixTime } from "date-fns";
-import { desc, eq } from "drizzle-orm";
+import { eq } from "drizzle-orm";
 import { drizzle } from "drizzle-orm/vercel-postgres";
 import { readFileSync } from "fs";
+import fs from "fs/promises";
+import path from "path";
 
 import * as schema from "@/db/schema";
 import fetchAllReviews from "@/lib/graphql/fetchReviews";
@@ -75,9 +77,10 @@ export const importRouter = router({
   }),
   importApps: procedure.mutation(async () => {
     try {
-      const data = JSON.parse(
-        readFileSync("/Users/maxime/Downloads/apps.json", "utf8")
-      );
+      // Define the file path
+      const filePath = path.join(process.cwd(), "public/files", "data.json");
+
+      const data = JSON.parse(readFileSync(filePath, "utf8"));
 
       for (const app of data) {
         await db.transaction(async (trx) => {
@@ -110,6 +113,33 @@ export const importRouter = router({
       return true;
     } catch (error) {
       console.error("Error importing data:", error);
+      return false;
+    }
+  }),
+  exportApps: procedure.mutation(async () => {
+    try {
+      const data = await db.select().from(schema.AppsTable);
+
+      // Convert dates to ISO strings for JSON serialization
+      const jsonData = data.map((app) => ({
+        ...app,
+        lastModificationDate: app.lastModificationDate?.toISOString() || null,
+        creationDate: app.creationDate.toISOString(),
+      }));
+
+      // Define the file path
+      const filePath = path.join(process.cwd(), "public/files", "data.json");
+
+      // Ensure the exports directory exists
+      await fs.mkdir(path.dirname(filePath), { recursive: true });
+
+      // Write the data to a JSON file
+      await fs.writeFile(filePath, JSON.stringify(jsonData, null, 2), "utf8");
+
+      console.log("Data exported successfully to", filePath);
+      return { success: true, filePath };
+    } catch (error) {
+      console.error("Error exporting data:", error);
       return false;
     }
   }),
