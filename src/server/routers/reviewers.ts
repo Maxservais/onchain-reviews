@@ -5,7 +5,9 @@ import { fromUnixTime } from "date-fns";
 import { eq, isNull, lt, or, type SQLWrapper } from "drizzle-orm";
 import { PgTableWithColumns } from "drizzle-orm/pg-core";
 import { drizzle, VercelPgDatabase } from "drizzle-orm/vercel-postgres";
-import { mainnet } from "wagmi/chains";
+import { createPublicClient } from "viem";
+import { mainnet } from "viem/chains";
+import { http } from "wagmi";
 import { z } from "zod";
 
 import * as schema from "@/db/schema";
@@ -17,7 +19,6 @@ import {
 } from "@/lib/graphql/fetchGitcoin";
 import { fetchPoap } from "@/lib/graphql/fetchPoap";
 
-import { getPublicClient } from "../../../wagmi.config";
 import { procedure, router } from "../trpc";
 import { linearNormalize, truncateAddress } from "../utils/utils";
 
@@ -140,7 +141,10 @@ export const reviewersRouter = router({
     );
 
     for (const reviewer of reviewersToUpdate) {
-      const publicClient = getPublicClient(mainnet.id);
+      const publicClient = createPublicClient({
+        chain: mainnet,
+        transport: http(),
+      });
 
       const ensName = await publicClient.getEnsName({
         address: reviewer.creator as `0x${string}`,

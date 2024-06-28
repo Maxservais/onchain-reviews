@@ -1,7 +1,6 @@
 "use client";
 
 import Link from "next/link";
-import { Fragment } from "react";
 
 import { trpc } from "@/app/_trpc/client";
 
@@ -11,9 +10,7 @@ import DetailedScores, { FinalScore } from "./Scores";
 export function AddReview({ slug }: { slug: string }) {
   return (
     <div className="pt-10">
-      <h3 className="text-lg font-medium text-gray-900">
-        Share your thoughts
-      </h3>
+      <h3 className="text-lg font-medium text-gray-900">Share your thoughts</h3>
       <p className="mt-1 text-sm text-gray-600">
         If you’ve used this app, share your thoughts with others.
       </p>
@@ -46,10 +43,10 @@ export default function Reviews({ appSlug }: { appSlug: string }) {
               Customer Reviews
             </h2>
             {reviewStats.data && reviewStats?.data?.totalCount > 0 ? (
-              <Fragment>
-                <FinalScore reviewStats={reviewStats.data} />
+              <div className="pt-4">
+                <FinalScore appSlug={appSlug} />
                 <DetailedScores reviewStats={reviewStats.data} />
-              </Fragment>
+              </div>
             ) : null}
             <AddReview slug={appSlug} />
           </div>

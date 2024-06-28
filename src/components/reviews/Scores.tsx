@@ -1,34 +1,38 @@
 import { StarIcon } from "@heroicons/react/20/solid";
 
+import { trpc } from "@/app/_trpc/client";
 import { reviewStats } from "@/lib/parseReviews";
 import { classNames } from "@/lib/utils";
 
-export function FinalScore({ reviewStats }: { reviewStats: reviewStats }) {
+export function FinalScore({ appSlug }: { appSlug: string }) {
+  const { data } = trpc.appsRouter.getApp.useQuery({
+    appSlug: appSlug,
+  });
+
+  if (!data) return null;
+
+  const averageScore = Number(data?.averageScore ?? 0);
+  const reviewCount = data?.reviewCount ?? 0;
+
   return (
-    <div className="mt-3 flex items-center">
+    <div className="flex items-center">
       <div>
         <div className="flex items-center">
           {[0, 1, 2, 3, 4].map((rating) => (
             <StarIcon
               key={rating}
               className={classNames(
-                reviewStats.average > rating
-                  ? "text-yellow-400"
-                  : "text-gray-300",
+                averageScore > rating ? "text-yellow-400" : "text-gray-300",
                 "h-5 w-5 flex-shrink-0"
               )}
               aria-hidden="true"
             />
           ))}
-          <p className="ml-2 text-sm text-gray-900">
-            {reviewStats.average}
-          </p>
+          <p className="ml-2 text-sm text-gray-900">{averageScore}</p>
         </div>
-        <p className="sr-only">{reviewStats.average} out of 5 stars</p>
+        <p className="sr-only">{averageScore} out of 5 stars</p>
       </div>
-      <p className="ml-2 text-sm text-gray-900">
-        ({reviewStats.totalCount} reviews)
-      </p>
+      <p className="ml-2 text-sm text-gray-900">({reviewCount} reviews)</p>
     </div>
   );
 }

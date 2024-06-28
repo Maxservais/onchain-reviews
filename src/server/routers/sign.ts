@@ -1,5 +1,6 @@
 import { SimulateContractErrorType, WriteContractErrorType } from "viem";
 import { privateKeyToAccount } from "viem/accounts";
+import { apexTestnet } from "viem/chains";
 import { z } from "zod";
 
 import { easABI } from "@/abis/eas";
@@ -44,6 +45,7 @@ const delegatedAttestationRequestSchema = z.object({
   signature: eip712SignatureSchema,
   attester: addressSchema,
   chainId: z.number(),
+  appSlug: z.string(),
 });
 
 export const signRouter = router({
@@ -62,6 +64,7 @@ export const signRouter = router({
           value,
           expirationTime,
           chainId,
+          appSlug,
         } = opts.input;
 
         const publicClient = getPublicClient(chainId);
@@ -148,7 +151,7 @@ export const signRouter = router({
         );
 
         if (attestationLog) {
-          backgroundTask();
+          backgroundTask(appSlug);
 
           return {
             success: true,

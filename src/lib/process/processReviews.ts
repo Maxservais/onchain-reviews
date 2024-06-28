@@ -1,7 +1,7 @@
 import { client } from "@/app/_trpc/client";
 import { delay } from "@/lib/utils";
 
-export async function backgroundTask() {
+export async function backgroundTask(slug: string) {
   await delay(6000);
 
   try {
@@ -9,6 +9,12 @@ export async function backgroundTask() {
       await client.importRouter.processReviews.mutate();
     } catch (error) {
       console.error("Error in processReviews mutation:", error);
+    }
+
+    try {
+      await client.appsRouter.updateAppStats.mutate({ appSlug: slug });
+    } catch (error) {
+      console.error("Error in updateAppStats mutation:", error);
     }
 
     try {

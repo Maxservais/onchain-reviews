@@ -70,6 +70,8 @@ export const AppsTable = pgTable("apps", {
   website: varchar("website", { length: 256 }),
   twitter: varchar("twitter", { length: 256 }),
   logoUrl: varchar("logoUrl", { length: 256 }),
+  reviewCount: integer("reviewCount").default(0),
+  averageScore: numeric("averageScore"),
   lastModificationDate: timestamp("lastModificationDate"),
   creationDate: timestamp("creationDate").defaultNow().notNull(),
 });

@@ -18,7 +18,7 @@ const handleRequest = frames(async (ctx) => {
   };
 
   if (ctx.message?.transactionId) {
-    backgroundTask();
+    backgroundTask(appSlug);
 
     return {
       image: (

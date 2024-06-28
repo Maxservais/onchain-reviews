@@ -2,6 +2,7 @@ import {
   EAS,
   EIP712AttestationParams,
 } from "@ethereum-attestation-service/eas-sdk";
+import slugify from "@sindresorhus/slugify";
 import { getClient, getConnectorClient } from "@wagmi/core";
 import { useWeb3Modal } from "@web3modal/wagmi/react";
 import { Dispatch, SetStateAction } from "react";
@@ -125,7 +126,7 @@ export default function Rating({
           setReviewStatus("success");
           scrollToTop();
 
-          await backgroundTask();
+          await backgroundTask(slugify(app.name));
 
           return true;
         } else {
@@ -163,6 +164,7 @@ export default function Rating({
           signature: res.signature,
           attester: (await getAddress(address!)) as `0x${string}`,
           chainId: chainId,
+          appSlug: slugify(app.name),
         };
 
         const responseData = await client.signRouter.delegateSign.mutate(
