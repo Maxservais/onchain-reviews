@@ -1,3 +1,4 @@
+import { authConnector } from "@web3modal/wagmi";
 import { createPublicClient, createWalletClient } from "viem";
 import { createConfig, http } from "wagmi";
 import { base, Chain, optimism, optimismSepolia } from "wagmi/chains";
@@ -73,6 +74,14 @@ export const config = createConfig({
       appName: metadata.name,
       appLogoUrl: metadata.icons[0],
       preference: "all",
+    }),
+    authConnector({
+      chains,
+      options: { projectId },
+      email: false, // default to true
+      socials: ["farcaster"],
+      showWallets: true, // default to true
+      walletFeatures: true, // default to true
     }),
   ],
   ssr: true,

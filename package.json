@@ -24,7 +24,7 @@
     "@trpc/react-query": "^11.0.0-rc.370",
     "@trpc/server": "^11.0.0-rc.370",
     "@vercel/postgres": "^0.9.0",
-    "@web3modal/wagmi": "^4.2.3",
+    "@web3modal/wagmi": "^5.0.11",
     "boring-avatars": "^1.10.2",
     "dlv": "^1.1.3",
     "drizzle-orm": "^0.31.2",
@@ -39,7 +39,7 @@
     "superjson": "^2.2.1",
     "tsx": "^4.15.7",
     "viem": "^2.16.2",
-    "wagmi": "^2.10.6"
+    "wagmi": "^2.12.2"
   },
   "devDependencies": {
     "@graphql-codegen/cli": "^5.0.2",
