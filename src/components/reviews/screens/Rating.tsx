@@ -35,6 +35,17 @@ import { config } from "../../../../wagmi.config";
 import { backgroundTask } from "../../../lib/process/processReviews";
 import RatingForm, { IFormInput } from "../RatingForm";
 
+function isFarcasterUser(connector: any): boolean {
+  if (connector?.id === "w3mAuth" && connector.type === "w3mAuth") {
+    // Check if 'farcaster' is in the socials array
+    return (
+      Array.isArray(connector.socials) &&
+      connector.socials.includes("farcaster")
+    );
+  }
+  return false;
+}
+
 const eas = new EAS(easContractAddress);
 
 export default function Rating({
@@ -50,7 +61,7 @@ export default function Rating({
   setReviewStatus: Dispatch<SetStateAction<Status>>;
   setError: Dispatch<SetStateAction<string>>;
 }) {
-  const { address, status: walletStatus, chainId } = useAccount();
+  const { address, status: walletStatus, chainId, connector } = useAccount();
   const { open: openWallet } = useWeb3Modal();
   const signer = useEthersSigner();
 
@@ -80,9 +91,11 @@ export default function Rating({
         address: address as `0x${string}`,
       });
 
+      const isFarcaster = isFarcasterUser(connector);
+
       /* User signs and pays for gas himself */
       /* --------------------------------------------------------- */
-      if (!ensName) {
+      if (!ensName && !isFarcaster) {
         let hash;
 
         if (!publicClient) {
