@@ -39,3 +39,14 @@ export function delay(ms: number) {
 export function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(" ");
 }
+
+export function isFarcasterUser(connector: any): boolean {
+  if (connector?.id === "w3mAuth" && connector.type === "w3mAuth") {
+    // Check if 'farcaster' is in the socials array
+    return (
+      Array.isArray(connector.socials) &&
+      connector.socials.includes("farcaster")
+    );
+  }
+  return false;
+}

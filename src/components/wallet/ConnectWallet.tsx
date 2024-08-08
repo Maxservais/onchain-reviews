@@ -50,7 +50,7 @@ export default function Wallet() {
       {walletStatus !== "connected" && (
         <div className="flex flex-row gap-x-2">
           <ConnectWallet />
-          <CreateWallet />
+          {/* <CreateWallet /> */}
         </div>
       )}
       {walletStatus === "connected" && (
