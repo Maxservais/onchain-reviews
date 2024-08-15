@@ -63,7 +63,7 @@ export default function About() {
                 >
                   Attestation-Based Dapp Rating System
                 </Link>
-                , like Yelp for dApps, where users can review decentralizd apps
+                , like Yelp for dApps, where users can review decentralized apps
                 they&apos;ve used and see others&apos; reviews. All reviews are
                 100% onchain, ensuring transparency and accessibility thanks to
                 the{" "}

@@ -81,28 +81,3 @@ export function parseReviews(data: SchemaQuery | undefined, chain: Chain) {
     }
   );
 }
-
-/**
- * Truncate an Ethereum address in the middle.
- * @param address - The Ethereum address to be truncated.
- * @param nPrefix - Number of characters to show at the start (default is 4).
- * @param nSuffix - Number of characters to show at the end (default is 4).
- * @param separator - Optional separator to use in place of ellipsis.
- * @returns The truncated Ethereum address.
- */
-export function truncateAddress(
-  address: string,
-  nPrefix: number = 4,
-  nSuffix: number = 4,
-  separator: string = "…"
-): string {
-  // Ensure the address is valid and long enough to be truncated
-  if (!address || address.length <= nPrefix + nSuffix) {
-    return address;
-  }
-
-  // Construct the truncated address
-  return `${address.slice(0, nPrefix)}${separator}${address.slice(
-    address.length - nSuffix
-  )}`;
-}

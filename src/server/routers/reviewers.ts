@@ -1,5 +1,6 @@
 import "@/db/envConfig";
 
+import { TRPCError } from "@trpc/server";
 import { sql } from "@vercel/postgres";
 import { fromUnixTime } from "date-fns";
 import { eq, isNull, lt, or, type SQLWrapper } from "drizzle-orm";
@@ -18,9 +19,10 @@ import {
   parseGitcoinAttestation,
 } from "@/lib/graphql/fetchGitcoin";
 import { fetchPoap } from "@/lib/graphql/fetchPoap";
+import { truncateAddress } from "@/lib/utils";
 
 import { procedure, router } from "../trpc";
-import { linearNormalize, truncateAddress } from "../utils/utils";
+import { linearNormalize } from "../utils/utils";
 
 export const db = drizzle(sql, { schema });
 
@@ -437,6 +439,24 @@ export const reviewersRouter = router({
 
     return true;
   }),
+  getReviewerInfo: procedure
+    .input(z.object({ address: z.string() }))
+    .query(async ({ input }) => {
+      const reviewer = await db
+        .select()
+        .from(schema.ReviewersTable)
+        .where(eq(schema.ReviewersTable.creator, input.address))
+        .limit(1);
+
+      if (reviewer.length === 0) {
+        throw new TRPCError({
+          code: "NOT_FOUND",
+          message: "Reviewer not found",
+        });
+      }
+
+      return reviewer[0];
+    }),
 });
 
 export type ReviewersRouter = typeof reviewersRouter;

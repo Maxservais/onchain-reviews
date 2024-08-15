@@ -1,8 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { Router } from "next/router";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 export const items = [
   {
@@ -12,6 +11,10 @@ export const items = [
   {
     name: "All apps",
     url: "/apps",
+  },
+  {
+    name: "Leaderboard",
+    url: "/leaderboard",
   },
   {
     name: "About",

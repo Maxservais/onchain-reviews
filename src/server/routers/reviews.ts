@@ -90,6 +90,32 @@ export const reviewsRouter = router({
 
       return stats;
     }),
+  getReviewerReviews: procedure
+    .input(
+      z.object({
+        address: z.string(),
+      })
+    )
+    .query(async ({ input }) => {
+      const reviews = await db
+        .select({
+          easId: schema.ReviewsTable.easId,
+          slug: schema.ReviewsTable.slug,
+          appName: schema.AppsTable.name,
+          score: schema.ReviewsTable.score,
+          review: schema.ReviewsTable.review,
+          reviewDate: schema.ReviewsTable.reviewDate,
+        })
+        .from(schema.ReviewsTable)
+        .innerJoin(
+          schema.AppsTable,
+          eq(schema.ReviewsTable.slug, schema.AppsTable.slug)
+        )
+        .where(eq(schema.ReviewsTable.creator, input.address))
+        .orderBy(schema.ReviewsTable.reviewDate);
+
+      return reviews;
+    }),
 });
 
 export type ReviewsRouter = typeof reviewsRouter;

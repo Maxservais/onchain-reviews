@@ -5,6 +5,7 @@ import { Inter } from "next/font/google";
 
 import Footer from "@/components/nav/Footer";
 import Navbar from "@/components/nav/Navbar";
+import { Toaster } from "@/components/ui/toaster";
 import { absoluteUrl } from "@/lib/utils";
 
 import { Providers } from "./providers";
@@ -43,6 +44,7 @@ export default function RootLayout({
           <div className="flex flex-col min-h-screen">
             <Navbar />
             <main className="flex-grow bg-gray-50">{children}</main>
+            <Toaster />
             <Footer />
           </div>
         </Providers>

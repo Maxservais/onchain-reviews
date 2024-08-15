@@ -12,7 +12,6 @@ import { Fragment } from "react";
 import { useState } from "react";
 
 import { trpc } from "@/app/_trpc/client";
-import { optimismExplorer } from "@/config/eas";
 import { classNames } from "@/lib/utils";
 import debankLogo from "@/public/logos/debank.png";
 import farcasterLogo from "@/public/logos/farcaster.png";
@@ -57,8 +56,7 @@ export function Review({
             <div className="relative group">
               <Link
                 className="text-sm font-bold text-gray-900"
-                href={`${optimismExplorer}/address/${address}`}
-                target="_blank"
+                href={`/reviewer/${address}`}
               >
                 {formattedAddress ? formattedAddress : address}
               </Link>
@@ -145,7 +143,7 @@ export function Review({
         <p className="sr-only">{score} out of 5 stars</p>
       </div>
       <div
-        className="mt-2 text-base font-light  italic text-gray-600"
+        className="mt-2 text-base font-light italic text-gray-600"
         dangerouslySetInnerHTML={{ __html: review }}
       />
     </div>

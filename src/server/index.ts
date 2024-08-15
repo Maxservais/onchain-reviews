@@ -7,6 +7,7 @@ import * as schema from "@/db/schema";
 
 import { appsRouter } from "./routers/apps";
 import { importRouter } from "./routers/import";
+import { leaderboardRouter } from "./routers/leaderboard";
 import { reviewersRouter } from "./routers/reviewers";
 import { reviewsRouter } from "./routers/reviews";
 import { signRouter } from "./routers/sign";
@@ -20,6 +21,7 @@ export const appRouter = router({
   importRouter,
   signRouter,
   appsRouter,
+  leaderboardRouter,
 });
 
 export type AppRouter = typeof appRouter;

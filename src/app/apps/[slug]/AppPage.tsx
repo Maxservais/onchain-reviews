@@ -3,6 +3,7 @@
 import Link from "next/link";
 
 import { trpc } from "@/app/_trpc/client";
+import DelayedToast from "@/components/nav/DelayedToast";
 import Reviews from "@/components/reviews/Reviews";
 
 export default function AppPage({ slug }: { slug: string }) {
@@ -81,6 +82,7 @@ export default function AppPage({ slug }: { slug: string }) {
       <div className="mx-auto max-w-8xl py-8 sm:py-18 gap-6 sm:px-6 ">
         <Reviews appSlug={slug} />
       </div>
+      <DelayedToast appName={app?.name} appSlug={slug} />
     </div>
   );
 }
