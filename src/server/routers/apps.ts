@@ -1,7 +1,7 @@
 import "@/db/envConfig";
 
 import { sql } from "@vercel/postgres";
-import { eq } from "drizzle-orm";
+import { desc, eq } from "drizzle-orm";
 import { drizzle } from "drizzle-orm/vercel-postgres";
 import { z } from "zod";
 
@@ -76,9 +76,15 @@ export const appsRouter = router({
       const { input } = opts;
 
       // First, get all reviews for the app
-      const reviews = await db.query.ReviewsTable.findMany({
-        where: (reviews, { eq }) => eq(reviews.slug, input.appSlug),
-      });
+      const reviews = await db
+        .selectDistinctOn([schema.ReviewsTable.creator])
+        .from(schema.ReviewsTable)
+        .where(eq(schema.ReviewsTable.slug, input.appSlug))
+        .orderBy(
+          schema.ReviewsTable.creator,
+          desc(schema.ReviewsTable.reviewDate)
+        )
+        .execute();
 
       // Calculate stats
       const reviewCount = reviews.length;
@@ -93,7 +99,7 @@ export const appsRouter = router({
         .update(schema.AppsTable)
         .set({
           reviewCount,
-          averageScore: averageScore.toString(),
+          averageScore: averageScore.toFixed(2),
         })
         .where(eq(schema.AppsTable.slug, input.appSlug));
 
@@ -105,9 +111,15 @@ export const appsRouter = router({
     const results = await Promise.all(
       apps.map(async (app) => {
         // Get all reviews for the current app
-        const reviews = await db.query.ReviewsTable.findMany({
-          where: (reviews, { eq }) => eq(reviews.slug, app.slug),
-        });
+        const reviews = await db
+          .selectDistinctOn([schema.ReviewsTable.creator])
+          .from(schema.ReviewsTable)
+          .where(eq(schema.ReviewsTable.slug, app.slug))
+          .orderBy(
+            schema.ReviewsTable.creator,
+            desc(schema.ReviewsTable.reviewDate)
+          )
+          .execute();
 
         // Calculate stats
         const reviewCount = reviews.length;

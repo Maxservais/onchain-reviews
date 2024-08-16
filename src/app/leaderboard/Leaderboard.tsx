@@ -7,6 +7,13 @@ import { useState } from "react";
 
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import {
   Table,
   TableBody,
   TableCell,
@@ -19,16 +26,17 @@ import { truncateAddress } from "@/lib/utils";
 import { trpc } from "../_trpc/client";
 
 export default function Leaderboard() {
-  const {
-    data: leaderboardData,
-    isLoading,
-    error,
-  } = trpc.leaderboardRouter.getLeaderboardData.useQuery();
-
+  const [timeFrame, setTimeFrame] = useState<"week" | "month" | "all">("all");
   const [sortBy, setSortBy] = useState<"reviewCount" | "trustScore">(
     "reviewCount"
   );
   const [sortOrder, setSortOrder] = useState<"asc" | "desc">("desc");
+
+  const {
+    data: leaderboardData,
+    isLoading,
+    error,
+  } = trpc.leaderboardRouter.getLeaderboardData.useQuery({ timeFrame });
 
   if (isLoading) {
     return (
@@ -77,9 +85,28 @@ export default function Leaderboard() {
     <div className="p-4">
       <Card className="w-full max-w-4xl mx-auto">
         <CardHeader>
-          <h2 className="text-2xl font-bold text-center">
-            Reviewer Leaderboard
-          </h2>
+          <div className="space-y-4">
+            <h2 className="text-2xl font-bold text-center">
+              Reviewer Leaderboard
+            </h2>
+            <div className="flex justify-end">
+              <Select
+                value={timeFrame}
+                onValueChange={(value: "week" | "month" | "all") =>
+                  setTimeFrame(value)
+                }
+              >
+                <SelectTrigger className="w-full sm:w-[200px]">
+                  <SelectValue placeholder="Select time frame" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="all">All Time</SelectItem>
+                  <SelectItem value="month">This Month</SelectItem>
+                  <SelectItem value="week">This Week</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+          </div>
         </CardHeader>
         <CardContent>
           <Table>

@@ -5,9 +5,23 @@ import { reviewStats } from "@/lib/parseReviews";
 import { classNames } from "@/lib/utils";
 
 export function FinalScore({ appSlug }: { appSlug: string }) {
-  const { data } = trpc.appsRouter.getApp.useQuery({
+  const { data, isLoading } = trpc.appsRouter.getApp.useQuery({
     appSlug: appSlug,
   });
+
+  if (isLoading) {
+    return (
+      <div className="flex items-center">
+        {[0, 1, 2, 3, 4].map((rating) => (
+          <StarIcon
+            key={rating}
+            className={classNames("h-5 w-5 flex-shrink-0", "text-gray-300")}
+            aria-hidden="true"
+          />
+        ))}
+      </div>
+    );
+  }
 
   if (!data) return null;
 
@@ -28,11 +42,17 @@ export function FinalScore({ appSlug }: { appSlug: string }) {
               aria-hidden="true"
             />
           ))}
-          <p className="ml-2 text-sm text-gray-900">{averageScore}</p>
+          <p className="ml-2 text-sm text-gray-900">
+            {averageScore.toFixed(2)}
+          </p>
         </div>
-        <p className="sr-only">{averageScore} out of 5 stars</p>
+        <p className="sr-only">{averageScore.toFixed(2)} out of 5 stars</p>
       </div>
-      <p className="ml-2 text-sm text-gray-900">({reviewCount} reviews)</p>
+      {reviewCount === 1 ? (
+        <p className="ml-2 text-sm text-gray-900">({reviewCount} review)</p>
+      ) : (
+        <p className="ml-2 text-sm text-gray-900">({reviewCount} reviews)</p>
+      )}
     </div>
   );
 }

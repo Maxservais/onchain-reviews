@@ -442,20 +442,18 @@ export const reviewersRouter = router({
   getReviewerInfo: procedure
     .input(z.object({ address: z.string() }))
     .query(async ({ input }) => {
-      const reviewer = await db
-        .select()
-        .from(schema.ReviewersTable)
-        .where(eq(schema.ReviewersTable.creator, input.address))
-        .limit(1);
+      const reviewer = await db.query.ReviewersTable.findFirst({
+        where: (reviewers, { eq }) => eq(reviewers.creator, input.address),
+      });
 
-      if (reviewer.length === 0) {
+      if (!reviewer) {
         throw new TRPCError({
           code: "NOT_FOUND",
           message: "Reviewer not found",
         });
       }
 
-      return reviewer[0];
+      return reviewer;
     }),
 });
 

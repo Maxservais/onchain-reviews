@@ -1,7 +1,7 @@
 import "@/db/envConfig";
 
 import { sql } from "@vercel/postgres";
-import { eq } from "drizzle-orm";
+import { desc, eq, gt, lt } from "drizzle-orm";
 import { drizzle } from "drizzle-orm/vercel-postgres";
 import { z } from "zod";
 
@@ -35,8 +35,25 @@ export const reviewsRouter = router({
       const { cursor, appSlug, score } = input;
 
       const items = await db.query.ReviewsTable.findMany({
-        where: (reviews, { gt, lt, eq, and }) => {
-          const conditions = [eq(reviews.slug, appSlug)];
+        where: (reviews, { eq, and, exists, not }) => {
+          const conditions = [
+            eq(reviews.slug, appSlug),
+            not(
+              exists(
+                db
+                  .select()
+                  .from(schema.ReviewsTable)
+                  .where(
+                    and(
+                      eq(schema.ReviewsTable.slug, appSlug),
+                      eq(schema.ReviewsTable.creator, reviews.creator),
+                      gt(schema.ReviewsTable.reviewDate, reviews.reviewDate)
+                    )
+                  )
+                  .limit(1)
+              )
+            ), // Subquery checks that there are no reviews for the same app and creator with a later date, effectively selecting only the latest review
+          ];
 
           if (score !== undefined) {
             conditions.push(eq(reviews.score, score));
@@ -81,10 +98,15 @@ export const reviewsRouter = router({
     .query(async (opts) => {
       const { input } = opts;
 
-      const reviews = await db.query.ReviewsTable.findMany({
-        where: (reviews) => eq(reviews.slug, input.appSlug),
-        orderBy: (reviews, { asc }) => asc(reviews.id),
-      });
+      const reviews = await db
+        .selectDistinctOn([schema.ReviewsTable.creator])
+        .from(schema.ReviewsTable)
+        .where(eq(schema.ReviewsTable.slug, input.appSlug))
+        .orderBy(
+          schema.ReviewsTable.creator,
+          desc(schema.ReviewsTable.reviewDate)
+        )
+        .execute();
 
       const stats = calculateReviewStats(reviews);
 
@@ -98,7 +120,7 @@ export const reviewsRouter = router({
     )
     .query(async ({ input }) => {
       const reviews = await db
-        .select({
+        .selectDistinctOn([schema.ReviewsTable.slug], {
           easId: schema.ReviewsTable.easId,
           slug: schema.ReviewsTable.slug,
           appName: schema.AppsTable.name,
@@ -112,7 +134,10 @@ export const reviewsRouter = router({
           eq(schema.ReviewsTable.slug, schema.AppsTable.slug)
         )
         .where(eq(schema.ReviewsTable.creator, input.address))
-        .orderBy(schema.ReviewsTable.reviewDate);
+        .orderBy(
+          schema.ReviewsTable.slug,
+          desc(schema.ReviewsTable.reviewDate)
+        );
 
       return reviews;
     }),
