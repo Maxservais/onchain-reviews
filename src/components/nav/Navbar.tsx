@@ -3,6 +3,9 @@
 import Link from "next/link";
 import { useState } from "react";
 
+import MobileMenu from "./MobileMenu";
+import ProfileIcon from "./ProfileIcon";
+
 export const items = [
   {
     name: "Home",
@@ -11,6 +14,10 @@ export const items = [
   {
     name: "All apps",
     url: "/apps",
+  },
+  {
+    name: "My Reviews",
+    url: "/my-reviews",
   },
   {
     name: "Leaderboard",
@@ -49,30 +56,7 @@ export default function Navbar() {
               ))}
             </div>
           </div>
-
-          <div className="hidden md:block">
-            <Link
-              href="https://github.com/Maxservais/onchain-reviews"
-              target="_blank"
-              className="inline-flex items-center bg-red-500 hover:bg-red-600 text-white font-medium py-2 px-4 rounded-full transition-colors duration-200"
-            >
-              View on Github
-              <svg
-                className="ml-2 w-4 h-4"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
-                />
-              </svg>
-            </Link>
-          </div>
+          <ProfileIcon />
 
           {/* Mobile menu button */}
           <div className="md:hidden">
@@ -120,22 +104,7 @@ export default function Navbar() {
       </div>
 
       {/* Mobile menu, show/hide based on menu state */}
-      {isMenuOpen && (
-        <div className="md:hidden">
-          <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-            {items?.map((item) => (
-              <Link
-                key={item.name}
-                href={item.url}
-                onClick={() => setIsMenuOpen(false)}
-                className="text-gray-700 hover:bg-gray-100 block px-3 py-2 rounded-md text-base font-medium"
-              >
-                {item.name}
-              </Link>
-            ))}
-          </div>
-        </div>
-      )}
+      {isMenuOpen && <MobileMenu items={items} setIsMenuOpen={setIsMenuOpen} />}
     </nav>
   );
 }

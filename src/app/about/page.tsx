@@ -5,9 +5,9 @@ import {
 } from "@heroicons/react/20/solid";
 import Link from "next/link";
 
-import { Faq } from "@/components/utils/FAQ";
+import { Faq, FAQEntry } from "@/components/utils/FAQ";
 
-import { faqs } from "../new-review/[slug]/NewReview";
+import { faqs } from "./faqData";
 
 const features = [
   {
@@ -92,7 +92,7 @@ export default function About() {
                   <div key={feature.name} className="relative pl-9">
                     <dt className="inline font-semibold text-sm">
                       <feature.icon
-                        className="absolute left-1 top-1 h-5 w-5 text-sky-600"
+                        className="absolute left-1 top-1 h-5 w-5 text-red-600"
                         aria-hidden="true"
                       />
                       {feature.name}

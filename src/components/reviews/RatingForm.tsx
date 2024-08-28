@@ -6,11 +6,10 @@ import { Fragment, useState } from "react";
 import { Dispatch, SetStateAction } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 
-import { App, faqs, Status } from "@/app/new-review/[slug]/NewReview";
+import { App, Status } from "@/app/new-review/[slug]/NewReview";
 import connectWallet, { getNetworks } from "@/lib/wallet/connectWallet";
 
 import { config } from "../../../wagmi.config";
-import { Faq } from "../utils/FAQ";
 
 export type IFormInput = {
   review: string;
@@ -145,7 +144,7 @@ export default function RatingForm({
               <textarea
                 id="review"
                 rows={5}
-                className="block w-full rounded-md border-0 py-1.5 px-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-sky-600 text-sm leading-6"
+                className="block w-full rounded-md border-0 py-1.5 px-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-red-600 text-sm leading-6"
                 placeholder={`What made your experience great? What is ${app?.name} doing well? Please be honest, helpful and constructive! Consider aspects that matter to you, such as: Overall quality, Ease of use, Features, Customer support, etc.`}
                 {...register("review", {
                   required: true,
@@ -263,9 +262,6 @@ export default function RatingForm({
         >
           Take me back
         </Link>
-      </div>
-      <div className="mx-auto max-w-4xl mt-8 p">
-        <Faq faqs={faqs} />
       </div>
     </form>
   );
