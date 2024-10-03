@@ -1,7 +1,7 @@
 import "@/db/envConfig";
 
 import { sql } from "@vercel/postgres";
-import { desc, eq, gt, lt } from "drizzle-orm";
+import { and, desc, eq, gt, lt } from "drizzle-orm";
 import { drizzle } from "drizzle-orm/vercel-postgres";
 import { z } from "zod";
 
@@ -14,7 +14,10 @@ export const db = drizzle(sql, { schema });
 
 export const reviewsRouter = router({
   getReviews: procedure.query(async () => {
-    const result = await db.select().from(schema.ReviewsTable);
+    const result = await db
+      .select()
+      .from(schema.ReviewsTable)
+      .where(eq(schema.ReviewsTable.isSpam, false));
 
     return result;
   }),
@@ -38,6 +41,7 @@ export const reviewsRouter = router({
         where: (reviews, { eq, and, exists, not }) => {
           const conditions = [
             eq(reviews.slug, appSlug),
+            eq(reviews.isSpam, false),
             not(
               exists(
                 db
@@ -47,7 +51,8 @@ export const reviewsRouter = router({
                     and(
                       eq(schema.ReviewsTable.slug, appSlug),
                       eq(schema.ReviewsTable.creator, reviews.creator),
-                      gt(schema.ReviewsTable.reviewDate, reviews.reviewDate)
+                      gt(schema.ReviewsTable.reviewDate, reviews.reviewDate),
+                      eq(schema.ReviewsTable.isSpam, false)
                     )
                   )
                   .limit(1)
@@ -101,7 +106,12 @@ export const reviewsRouter = router({
       const reviews = await db
         .selectDistinctOn([schema.ReviewsTable.creator])
         .from(schema.ReviewsTable)
-        .where(eq(schema.ReviewsTable.slug, input.appSlug))
+        .where(
+          and(
+            eq(schema.ReviewsTable.slug, input.appSlug),
+            eq(schema.ReviewsTable.isSpam, false)
+          )
+        )
         .orderBy(
           schema.ReviewsTable.creator,
           desc(schema.ReviewsTable.reviewDate)
@@ -133,7 +143,12 @@ export const reviewsRouter = router({
           schema.AppsTable,
           eq(schema.ReviewsTable.slug, schema.AppsTable.slug)
         )
-        .where(eq(schema.ReviewsTable.creator, input.address))
+        .where(
+          and(
+            eq(schema.ReviewsTable.creator, input.address),
+            eq(schema.ReviewsTable.isSpam, false)
+          )
+        )
         .orderBy(
           schema.ReviewsTable.slug,
           desc(schema.ReviewsTable.reviewDate)

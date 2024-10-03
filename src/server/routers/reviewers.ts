@@ -3,7 +3,7 @@ import "@/db/envConfig";
 import { TRPCError } from "@trpc/server";
 import { sql } from "@vercel/postgres";
 import { fromUnixTime } from "date-fns";
-import { eq, isNull, lt, or, type SQLWrapper } from "drizzle-orm";
+import { and, eq, isNull, lt, or, type SQLWrapper } from "drizzle-orm";
 import { PgTableWithColumns } from "drizzle-orm/pg-core";
 import { drizzle, VercelPgDatabase } from "drizzle-orm/vercel-postgres";
 import { createPublicClient } from "viem";
@@ -42,15 +42,15 @@ async function selectReviewersToUpdate(
   return await db
     .select()
     .from(table)
-    .where(or(isNull(lastUpdatedField), lt(lastUpdatedField, threshold)));
+    .where(
+      and(
+        or(isNull(lastUpdatedField), lt(lastUpdatedField, threshold)),
+        eq(table.isLikelySpammer, false) // Exclude likely spammers
+      )
+    );
 }
 
 export const reviewersRouter = router({
-  getReviewers: procedure.query(async () => {
-    const result = await db.select().from(schema.ReviewersTable);
-
-    return result;
-  }),
   getEnsName: procedure
     .input(
       z.object({

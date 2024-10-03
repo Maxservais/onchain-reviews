@@ -1,7 +1,7 @@
 import "@/db/envConfig";
 
 import { sql } from "@vercel/postgres";
-import { desc, eq } from "drizzle-orm";
+import { and, desc, eq } from "drizzle-orm";
 import { drizzle } from "drizzle-orm/vercel-postgres";
 import { z } from "zod";
 
@@ -79,7 +79,12 @@ export const appsRouter = router({
       const reviews = await db
         .selectDistinctOn([schema.ReviewsTable.creator])
         .from(schema.ReviewsTable)
-        .where(eq(schema.ReviewsTable.slug, input.appSlug))
+        .where(
+          and(
+            eq(schema.ReviewsTable.slug, input.appSlug),
+            eq(schema.ReviewsTable.isSpam, false) // Exclude spam reviews
+          )
+        )
         .orderBy(
           schema.ReviewsTable.creator,
           desc(schema.ReviewsTable.reviewDate)
@@ -100,6 +105,7 @@ export const appsRouter = router({
         .set({
           reviewCount,
           averageScore: averageScore.toFixed(2),
+          lastModificationDate: new Date(),
         })
         .where(eq(schema.AppsTable.slug, input.appSlug));
 
@@ -114,7 +120,12 @@ export const appsRouter = router({
         const reviews = await db
           .selectDistinctOn([schema.ReviewsTable.creator])
           .from(schema.ReviewsTable)
-          .where(eq(schema.ReviewsTable.slug, app.slug))
+          .where(
+            and(
+              eq(schema.ReviewsTable.slug, app.slug),
+              eq(schema.ReviewsTable.isSpam, false) // Exclude spam reviews
+            )
+          )
           .orderBy(
             schema.ReviewsTable.creator,
             desc(schema.ReviewsTable.reviewDate)
@@ -135,6 +146,7 @@ export const appsRouter = router({
           .set({
             reviewCount,
             averageScore: averageScore.toString(),
+            lastModificationDate: new Date(),
           })
           .where(eq(schema.AppsTable.slug, app.slug));
 

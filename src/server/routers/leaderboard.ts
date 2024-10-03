@@ -1,7 +1,7 @@
 import "@/db/envConfig";
 
 import { sql as sqlDrizzle } from "@vercel/postgres";
-import { and,desc, eq, gte, sql } from "drizzle-orm";
+import { and, desc, eq, gte, sql } from "drizzle-orm";
 import { drizzle } from "drizzle-orm/vercel-postgres";
 import { z } from "zod";
 
@@ -52,9 +52,11 @@ export const leaderboardRouter = router({
           schema.ReviewsTable,
           and(
             eq(schema.ReviewersTable.creator, schema.ReviewsTable.creator),
-            dateFilter
+            dateFilter,
+            eq(schema.ReviewsTable.isSpam, false)
           )
         )
+        .where(eq(schema.ReviewersTable.isLikelySpammer, false))
         .groupBy(schema.ReviewersTable.creator)
         .orderBy((fields) => [desc(fields.reviewCount)])
         .limit(100);
