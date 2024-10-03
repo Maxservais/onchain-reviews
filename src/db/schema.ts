@@ -32,6 +32,7 @@ export const ReviewsTable = pgTable("reviews", {
   txId: varchar("txId", { length: 256 }).notNull(),
   revoked: boolean("revoked").default(false),
   chain: chainEnum("chain").notNull(),
+  isSpam: boolean("isSpam").default(false),
   lastModificationDate: timestamp("lastModificationDate"),
   creationDate: timestamp("creationDate").defaultNow().notNull(),
 });
@@ -60,6 +61,7 @@ export const ReviewersTable = pgTable("reviewers", {
   trustScore: numeric("trustScore"),
   trustScoreLastUpdated: timestamp("trustScoreLastUpdated"),
   lastModificationDate: timestamp("lastModificationDate"),
+  isLikelySpammer: boolean("isLikelySpammer").default(false),
   creationDate: timestamp("creationDate").defaultNow().notNull(),
 });
 
