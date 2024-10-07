@@ -1,6 +1,6 @@
 import { getAccount, switchChain } from "@wagmi/core";
 import { type SwitchChainReturnType } from "@wagmi/core";
-import { base, optimism, optimismSepolia } from "wagmi/chains";
+import { base, Chain, optimism, optimismSepolia } from "wagmi/chains";
 
 import { config } from "../../../wagmi.config";
 
@@ -14,11 +14,10 @@ export const getNetworks = () => {
 
 export default async function connectWallet(
   walletStatus: "connected" | "connecting" | "disconnected" | "reconnecting",
-  open: (options?: any | undefined) => Promise<void>
+  open: (options?: any | undefined) => Promise<void>,
+  preferredChain: Chain
 ): Promise<{ success: boolean; message?: string }> {
   const { chainId } = getAccount(config);
-
-  const networks = getNetworks();
 
   try {
     if (
@@ -28,66 +27,53 @@ export default async function connectWallet(
     ) {
       await open();
 
-      let isChainIdDifferent = true;
-      for (const network of networks) {
-        if (chainId === network.id) {
-          isChainIdDifferent = false;
-          break;
-        }
-      }
-
-      if (isChainIdDifferent) {
+      if (chainId !== preferredChain.id) {
         const result: SwitchChainReturnType = await switchChain(config, {
-          chainId: networks[0].id,
+          chainId: preferredChain.id,
         });
-        if (result.id !== networks[0].id) {
+        if (result.id !== preferredChain.id) {
           return {
             success: false,
-            message: "Failed to switch chain",
+            message: `Failed to switch to ${preferredChain.name}`,
           };
         }
         return {
           success: true,
-          message: "Wallet opened and chain switched successfully.",
+          message: `Wallet opened and switched to ${preferredChain.name} successfully.`,
         };
       }
       return {
         success: true,
-        message: "Wallet opened and Already on the correct chain.",
+        message: `Wallet opened and already on ${preferredChain.name}.`,
       };
     } else {
-      // Only switch chain if the current network ID is not the desired one
-      let isChainIdDifferent = true;
-      for (const network of networks) {
-        if (chainId === network.id) {
-          isChainIdDifferent = false;
-          break;
-        }
-      }
-
-      if (isChainIdDifferent) {
+      // Only switch chain if the current network ID is not the preferred one
+      if (chainId !== preferredChain.id) {
         const result: SwitchChainReturnType = await switchChain(config, {
-          chainId: networks[0].id,
+          chainId: preferredChain.id,
         });
-        if (result.id !== networks[0].id) {
+        if (result.id !== preferredChain.id) {
           return {
             success: false,
-            message: "Failed to switch chain",
+            message: `Failed to switch to ${preferredChain.name}`,
           };
         }
-        return { success: true, message: "Chain switched successfully." };
+        return {
+          success: true,
+          message: `Switched to ${preferredChain.name} successfully.`,
+        };
       }
       // If already connected and on the correct chain
       return {
         success: true,
-        message: "Already connected and on the correct chain.",
+        message: `Already connected and on ${preferredChain.name}.`,
       };
     }
   } catch (error) {
     // Return a failure status and error message
     return {
       success: false,
-      message: `Failed to connect or switch chain. ${error}`,
+      message: `Failed to connect or switch to ${preferredChain.name}. ${error}`,
     };
   }
 }

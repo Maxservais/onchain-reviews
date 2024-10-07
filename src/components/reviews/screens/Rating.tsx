@@ -8,6 +8,7 @@ import { useWeb3Modal } from "@web3modal/wagmi/react";
 import { Dispatch, SetStateAction } from "react";
 import {
   Abi,
+  Chain,
   createPublicClient,
   encodeAbiParameters,
   getAddress,
@@ -19,7 +20,7 @@ import {
   waitForTransactionReceipt,
   writeContract,
 } from "viem/actions";
-import { useAccount } from "wagmi";
+import { useAccount, useBalance } from "wagmi";
 import { base, mainnet, optimism, optimismSepolia } from "wagmi/chains";
 
 import { easABI } from "@/abis/eas";
@@ -46,17 +47,45 @@ export default function Rating({
 }: {
   app: App;
   reviewStatus: Status;
-  setNewAttestationUID: (uid: string) => void;
-  setReviewStatus: Dispatch<SetStateAction<Status>>;
-  setError: Dispatch<SetStateAction<string>>;
+  setNewAttestationUID: (uid: string) => Promise<void>;
+  setReviewStatus: (status: Status) => Promise<void>;
+  setError: (error: string) => Promise<void>;
 }) {
   const { address, status: walletStatus, chainId, connector } = useAccount();
   const { open: openWallet } = useWeb3Modal();
   const signer = useEthersSigner();
 
+  const { data: optimismBalance } = useBalance({
+    address,
+    chainId: optimism.id,
+  });
+
+  const { data: baseBalance } = useBalance({
+    address,
+    chainId: base.id,
+  });
+
+  const getPreferredChain = (): Chain => {
+    const isDev = process.env.NODE_ENV === "development";
+    if (isDev) return optimismSepolia;
+
+    const hasOptimismBalance =
+      optimismBalance && optimismBalance.value > BigInt(0);
+    const hasBaseBalance = baseBalance && baseBalance.value > BigInt(0);
+
+    if (hasOptimismBalance) return optimism;
+    if (hasBaseBalance) return base;
+    return chainId === base.id ? base : optimism; // Prefer current chain if it's Base, otherwise default to Optimism
+  };
+
   // Function to handle wallet connection
   async function handleConnectWallet() {
-    const { success } = await connectWallet(walletStatus, openWallet);
+    const preferredChain = getPreferredChain();
+    const { success } = await connectWallet(
+      walletStatus,
+      openWallet,
+      preferredChain
+    );
     return success;
   }
 
@@ -195,16 +224,17 @@ export default function Rating({
   }
 
   const onSubmit = async (data: IFormInput) => {
-    await handleConnectWallet();
-
-    // Attempt the transaction
     const isDev = process.env.NODE_ENV === "development";
-    if (
-      address &&
-      (chainId === optimism.id ||
-        chainId === base.id ||
-        (isDev && chainId === optimismSepolia.id))
-    ) {
+    const supportedChains: number[] = isDev
+      ? [optimismSepolia.id]
+      : [optimism.id, base.id];
+
+    if (!address || !chainId || !supportedChains.includes(chainId)) {
+      const success = await handleConnectWallet();
+      if (!success) return;
+    }
+
+    if (address && chainId && supportedChains.includes(chainId)) {
       await handleTransactionSigning(data, chainId);
     }
   };
@@ -223,6 +253,7 @@ export default function Rating({
         onSubmit={onSubmit}
         openWallet={openWallet}
         setReviewStatus={setReviewStatus}
+        preferredChain={getPreferredChain()}
       />
     </>
   );

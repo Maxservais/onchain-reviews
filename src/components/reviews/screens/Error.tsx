@@ -1,5 +1,4 @@
 import { ExclamationTriangleIcon } from "@heroicons/react/24/outline";
-import { Dispatch, SetStateAction } from "react";
 
 import { Status } from "@/app/new-review/[slug]/NewReview";
 
@@ -7,57 +6,46 @@ export function Error({
   setReviewStatus,
   error,
 }: {
-  setReviewStatus: Dispatch<SetStateAction<Status>>;
+  setReviewStatus: (status: Status) => Promise<void>;
   error: string;
 }) {
   return (
-    <div>
-      <div>
-        <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-red-100">
+    <div className="pt-6 text-left">
+      <div className="flex items-center">
+        <h3 className="mr-3 text-2xl font-semibold leading-9 text-gray-900 dark:text-white">
+          Review submission failed
+        </h3>
+        <div className="flex h-6 w-6 items-center justify-center rounded-full bg-red-100">
           <ExclamationTriangleIcon
-            className="h-6 w-6 text-red-600"
+            className="h-3 w-3 text-red-600"
             aria-hidden="true"
           />
         </div>
-        <div className="py-3 sm:py-6 text-center">
-          <h3 className="text-2xl font-semibold leading-6 text-gray-900">
-            Review unsuccessful
-          </h3>
-        </div>
-        <div className="col-span-full py-4">
-          <p className="block text-base font-semibold leading-7 text-gray-900">
-            Sorry, it seems there was an error submitting your review.
-          </p>
-          <p className="mt-1 line-clamp-2 text-sm leading-6 text-gray-600">
-            {error}
-          </p>
-          <p className="mt-1 text-sm leading-6 text-gray-600">
-            Please try again and if the problem persists, reach out.
-          </p>
-        </div>
-        <div className="col-span-full py-4">
-          <p className="block text-base font-semibold leading-7 text-gray-900">
-            Here are some things that could have gone wrong...
-          </p>
-          <p className="mt-1 text-sm leading-6 text-gray-600">
-            - Is your wallet connected to OP Mainnet?
-          </p>
-          <p className="mt-1 text-sm leading-6 text-gray-600">
-            - Have you made sure you have enough ETH to cover the transaction
-            fees (if it&apos;s not sponsored)?
-          </p>
-          <p className="mt-1 text-sm leading-6 text-gray-600">
-            - Did you sign the transaction with your wallet?
-          </p>
-        </div>
       </div>
-      <div className="mt-5 sm:mt-6">
+      <div className="mt-4 space-y-4">
+        <p className="text-sm leading-6 text-gray-600 dark:text-gray-400">
+          We apologize, but there was an error submitting your review.
+          Here&apos;s what might have gone wrong:
+        </p>
+        <ul className="list-disc pl-5 text-sm leading-6 text-gray-600 dark:text-gray-400">
+          <li>Your wallet might not be connected to OP Mainnet</li>
+          <li>
+            You may not have enough ETH to cover transaction fees (if not
+            sponsored)
+          </li>
+          <li>The transaction might not have been signed in your wallet</li>
+        </ul>
+        <p className="text-sm leading-6 text-gray-600 dark:text-gray-400">
+          Error details: <span className="font-medium">{error}</span>
+        </p>
+      </div>
+      <div className="mt-6">
         <button
           type="button"
           className="inline-flex w-full justify-center rounded-md bg-red-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-red-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-600"
           onClick={() => setReviewStatus("rating")}
         >
-          Try Reviewing again
+          Try reviewing again
         </button>
       </div>
     </div>

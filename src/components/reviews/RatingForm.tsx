@@ -3,8 +3,8 @@ import { ExclamationCircleIcon } from "@heroicons/react/20/solid";
 import { getAccount } from "@wagmi/core";
 import Link from "next/link";
 import { Fragment, useState } from "react";
-import { Dispatch, SetStateAction } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
+import { Chain } from "wagmi/chains";
 
 import { App, Status } from "@/app/new-review/[slug]/NewReview";
 import connectWallet, { getNetworks } from "@/lib/wallet/connectWallet";
@@ -23,13 +23,15 @@ export default function RatingForm({
   onSubmit,
   openWallet,
   setReviewStatus,
+  preferredChain,
 }: {
   app: App;
   reviewStatus: Status;
   walletStatus: "connected" | "connecting" | "disconnected" | "reconnecting";
   onSubmit: SubmitHandler<IFormInput>;
   openWallet: () => Promise<void>;
-  setReviewStatus: Dispatch<SetStateAction<Status>>;
+  setReviewStatus: (status: Status) => Promise<void>;
+  preferredChain: Chain;
 }) {
   const {
     register,
@@ -66,13 +68,22 @@ export default function RatingForm({
     }
   }
 
+  const handleConnectWallet = async () => {
+    await openWallet();
+    await setReviewStatus("rating");
+  };
+
+  const handleSwitchChain = async () => {
+    await connectWallet(walletStatus, openWallet, preferredChain);
+  };
+
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <div>
         <div className="col-span-full py-4">
           <label
             htmlFor="score"
-            className="block text-base font-semibold leading-7 text-gray-900"
+            className="block text-base font-semibold leading-7 text-gray-900 dark:text-white"
           >
             Rate your recent experience
           </label>
@@ -99,10 +110,13 @@ export default function RatingForm({
             {errors.score && (
               <div className="flex items-center mt-1">
                 <ExclamationCircleIcon
-                  className="h-5 w-5 text-red-600"
+                  className="h-5 w-5 text-red-600 dark:text-red-500"
                   aria-hidden="true"
                 />
-                <p className="text-sm text-red-600 ml-1" id="email-error">
+                <p
+                  className="text-sm text-red-600 dark:text-red-500 ml-1"
+                  id="email-error"
+                >
                   Select a score from 1 to 5.
                 </p>
               </div>
@@ -112,7 +126,7 @@ export default function RatingForm({
         <div className="col-span-full pb-2">
           <label
             htmlFor="review"
-            className="block text-base font-semibold leading-7 text-gray-900"
+            className="block text-base font-semibold leading-7 text-gray-900 dark:text-white"
           >
             Tell us more about your experience with {app?.name}
           </label>
@@ -122,7 +136,7 @@ export default function RatingForm({
                 <textarea
                   id="review"
                   rows={5}
-                  className="block w-full rounded-md border-0 py-1.5 px-3 shadow-sm ring-1 ring-inset ring-red-300 placeholder:text-red-600 focus:ring-2 focus:ring-inset focus:ring-red-500 text-sm leading-6"
+                  className="block w-full rounded-md border-0 dark:bg-white/5 py-1.5 shadow-sm ring-1 ring-inset ring-red-300 dark:ring-red-100 placeholder:text-red-600 dark:placeholder:text-red-500 focus:ring-2 focus:ring-inset focus:ring-red-500 dark:focus:ring-red-300 text-sm leading-6"
                   placeholder={`What made your experience great? What is ${app?.name} doing well? Please be honest, helpful and constructive! Consider aspects that matter to you, such as: Overall quality, Ease of use, Features, Customer support, etc.`}
                   {...register("review", {
                     required: true,
@@ -132,10 +146,13 @@ export default function RatingForm({
                 />
                 <div className="flex items-center mt-2">
                   <ExclamationCircleIcon
-                    className="h-5 w-5 text-red-600"
+                    className="h-5 w-5 text-red-600 dark:text-red-500"
                     aria-hidden="true"
                   />
-                  <p className="text-sm text-red-600 ml-1" id="email-error">
+                  <p
+                    className="text-sm text-red-600 dark:text-red-500 ml-1"
+                    id="email-error"
+                  >
                     Not a valid description.
                   </p>
                 </div>
@@ -144,7 +161,7 @@ export default function RatingForm({
               <textarea
                 id="review"
                 rows={5}
-                className="block w-full rounded-md border-0 py-1.5 px-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-red-600 text-sm leading-6"
+                className="block w-full rounded-md border-0 dark:bg-white/5 py-1.5 text-gray-900 dark:text-gray-200 shadow-sm ring-1 ring-inset ring-gray-300 dark:ring-white/10 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-red-600 dark:focus:ring-red-500 text-sm leading-6"
                 placeholder={`What made your experience great? What is ${app?.name} doing well? Please be honest, helpful and constructive! Consider aspects that matter to you, such as: Overall quality, Ease of use, Features, Customer support, etc.`}
                 {...register("review", {
                   required: true,
@@ -155,7 +172,7 @@ export default function RatingForm({
             )}
           </div>
         </div>
-        <p className="mt-1 text-sm leading-6 text-gray-600">
+        <p className="mt-1 text-sm leading-6 text-gray-600 dark:text-gray-400">
           This information will be displayed publicly so be mindful about what
           you share.
         </p>
@@ -166,10 +183,7 @@ export default function RatingForm({
           <button
             type="button"
             className="inline-flex w-full justify-center rounded-md bg-red-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-red-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-600 sm:col-start-2"
-            onClick={() => {
-              openWallet();
-              setReviewStatus("rating");
-            }}
+            onClick={handleConnectWallet}
           >
             Connect Wallet
           </button>
@@ -180,11 +194,9 @@ export default function RatingForm({
             <button
               type="button"
               className="inline-flex w-full justify-center rounded-md bg-red-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-red-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-600 sm:col-start-2"
-              onClick={() => {
-                connectWallet(walletStatus, openWallet);
-              }}
+              onClick={handleSwitchChain}
             >
-              Switch Chain
+              Switch to {preferredChain.name}
             </button>
           )}
         {walletStatus === "connected" &&
@@ -255,13 +267,6 @@ export default function RatingForm({
             Transaction in progress
           </button>
         )}
-        <Link
-          type="button"
-          className="mt-3 inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 sm:col-start-1 sm:mt-0"
-          href={`/apps/${app?.slug}`}
-        >
-          Take me back
-        </Link>
       </div>
     </form>
   );
