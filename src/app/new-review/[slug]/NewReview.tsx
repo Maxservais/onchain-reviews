@@ -70,7 +70,7 @@ function ReviewForm({ app }: { app: App }) {
 
   const handleStepClick = (step: number) => {
     if (step === 1) {
-      router.push("/apps");
+      router.push("/");
     } else if (step === 2) {
       setReviewStatus("rating");
     }

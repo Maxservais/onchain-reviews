@@ -9,7 +9,7 @@ import { items } from "./Navbar";
 const socials = [
   {
     name: "Twitter",
-    url: "https://x.com/web3xplore",
+    url: "https://x.com/MaximeServais77",
     IconComponent: FaXTwitter,
   },
   {

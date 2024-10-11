@@ -1,7 +1,7 @@
 import Link from "next/link";
 import React from "react";
 
-import { BlockchainProps, blockchainsData } from "@/app/superchain/blockchains";
+import { BlockchainProps, blockchainsData } from "@/components/superchain/blockchains";
 
 type BlockchainCardProps = {
   blockchain: BlockchainProps;

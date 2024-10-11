@@ -8,20 +8,20 @@ import ProfileIcon from "./ProfileIcon";
 
 export const items = [
   {
-    name: "Home",
+    name: "All apps",
     url: "/",
   },
   {
-    name: "All apps",
-    url: "/apps",
+    name: "Leaderboard",
+    url: "/leaderboard",
   },
   {
     name: "My Reviews",
     url: "/my-reviews",
   },
   {
-    name: "Leaderboard",
-    url: "/leaderboard",
+    name: "Superchain",
+    url: "/superchain",
   },
   {
     name: "About",

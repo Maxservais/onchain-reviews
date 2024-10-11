@@ -49,7 +49,7 @@ export default function Apps({
         )}
         {displayLink && (
           <Link
-            href="/apps"
+            href="/"
             className="whitespace-nowrap text-sm font-medium text-red-600 hover:text-red-500"
           >
             View all Apps

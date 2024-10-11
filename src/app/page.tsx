@@ -1,19 +1,20 @@
-import Apps from "@/components/apps/Apps";
-import SuperchainBlockchains from "@/components/superchain/SuperchainBlockchains";
-import { SuperchainHero } from "@/components/superchain/SuperchainHero";
-import SuperchainResources from "@/components/superchain/SuperchainResources";
-import SuperchainStats from "@/components/superchain/SuperchainStats";
+import { dehydrate, HydrationBoundary } from "@tanstack/react-query";
 
-const MAX_APPS = 8;
+import { createSSRHelper } from "@/server/utils/ssr";
 
-export default async function Home() {
+import AllApps from "./apps/AllApps";
+
+export default async function Page() {
+  const helper = await createSSRHelper();
+
+  await helper.appsRouter.getApps.prefetch({
+    sortBy: "alphabetical",
+    order: "asc",
+  });
+
   return (
-    <>
-      <SuperchainHero />
-      <SuperchainStats />
-      <SuperchainBlockchains />
-      <Apps max={MAX_APPS} displayLink={true} />
-      <SuperchainResources />
-    </>
+    <HydrationBoundary state={dehydrate(helper.queryClient)}>
+      <AllApps />
+    </HydrationBoundary>
   );
 }
